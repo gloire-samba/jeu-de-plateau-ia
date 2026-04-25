@@ -20,7 +20,6 @@ from .ia_juge_service import IaJugeService
 class UtilisateurViewSet(viewsets.ModelViewSet):
     queryset = Utilisateur.objects.all().order_by('id')
     serializer_class = UtilisateurCrudSerializer
-    # GET public, le reste Admin
     def get_permissions(self):
         if self.request.method == 'GET':
             return [AllowAny()]
@@ -29,11 +28,8 @@ class UtilisateurViewSet(viewsets.ModelViewSet):
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all().order_by('id')
     serializer_class = QuestionCrudSerializer
-    
-    # TOUT EST VERROUILLÉ (Admin Seulement)
     def get_permissions(self):
         return [IsAdminRole()]
-    
     def get_queryset(self):
         queryset = super().get_queryset()
         categorie = self.request.query_params.get('categorie')
@@ -42,11 +38,9 @@ class QuestionViewSet(viewsets.ModelViewSet):
         return queryset
 
 class PartieViewSet(viewsets.ModelViewSet):
-    queryset = Partie.objects.all().order_by('-date_creation') # Les plus récentes d'abord
+    queryset = Partie.objects.all().order_by('-date_creation')
     serializer_class = PartieCrudSerializer
-
     def get_permissions(self):
-        # GET est public (pour les joueurs connectés), le reste est Admin
         if self.request.method == 'GET':
             return [AllowAny()]
         return [IsAdminRole()]
@@ -54,8 +48,6 @@ class PartieViewSet(viewsets.ModelViewSet):
 class PartieJoueurViewSet(viewsets.ModelViewSet):
     queryset = PartieJoueur.objects.all().order_by('id')
     serializer_class = PartieJoueurCrudSerializer
-    
-    # GET public, le reste Admin
     def get_permissions(self):
         if self.request.method == 'GET':
             return [AllowAny()]
@@ -64,15 +56,11 @@ class PartieJoueurViewSet(viewsets.ModelViewSet):
 class HistoriqueQuestionViewSet(viewsets.ModelViewSet):
     queryset = HistoriqueQuestion.objects.all().order_by('id')
     serializer_class = HistoriqueQuestionSerializer
-    
-    # TOUT EST VERROUILLÉ (Admin Seulement)
     def get_permissions(self):
         return [IsAdminRole()]
 
 class CasePlateauViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CasePlateauSerializer
-    
-    # GET public, le reste Admin
     def get_permissions(self):
         if self.request.method == 'GET':
             return [AllowAny()]
@@ -101,6 +89,15 @@ def generer_indice(reponse):
         else:
             sb.append("_ ")
     return "".join(sb).strip()
+
+def enregistrer_dans_historique(partie_id, message):
+    try:
+        partie = Partie.objects.get(id=partie_id)
+        ancien_histo = partie.historique if partie.historique else ""
+        partie.historique = ancien_histo + message + "\n"
+        partie.save()
+    except Partie.DoesNotExist:
+        pass
 
 def faire_jouer_bots(partie_id, taille_plateau, plateau_actuel):
     logs_ia = []
@@ -157,34 +154,84 @@ def faire_jouer_bots(partie_id, taille_plateau, plateau_actuel):
         action_supp = ""
         effet_attente_ia = resultat_ia.get("effet_en_attente")
         
-        if effet_attente_ia and effet_attente_ia.startswith("CIBLE_"):
-            cibles_normales = []
-            cibles_echange = []
+        if effet_attente_ia:
+            if effet_attente_ia.startswith("CIBLE_"):
+                cibles_normales = []
+                cibles_echange = []
+                
+                tous_pour_ia = PartieJoueur.objects.filter(partie_id=partie_id).order_by('ordre_tour')
+                for p in tous_pour_ia:
+                    if getattr(p, 'effet_actif', '') != "BOUCLIER": 
+                        cibles_echange.append(p)
+                        if p.id != ia.id:
+                            cibles_normales.append(p)
+                            
+                if effet_attente_ia == "CIBLE_ECHANGE" and len(cibles_echange) >= 2:
+                    cibles = random.sample(cibles_echange, 2)
+                    MoteurJeuService.appliquer_effet_interactif(ia.id, cibles[0].id, cibles[1].id)
+                    nom1 = cibles[0].nom_ia if cibles[0].est_ia else "Vous"
+                    nom2 = cibles[1].nom_ia if cibles[1].est_ia else "Vous"
+                    action_supp = f" 🔄 Échange {nom1} avec {nom2}"
+                elif effet_attente_ia != "CIBLE_ECHANGE" and cibles_normales:
+                    cible_choisie = random.choice(cibles_normales)
+                    MoteurJeuService.appliquer_effet_interactif(ia.id, cible_choisie.id, None)
+                    nom_cible = cible_choisie.nom_ia if cible_choisie.est_ia else "Vous"
+                    action_supp = f" 🎯 Cible {nom_cible} avec {effet_attente_ia}"
+                else:
+                    ia_comp = PartieJoueur.objects.get(id=ia.id)
+                    ia_comp.position_plateau = min(taille_plateau, ia_comp.position_plateau + de_ia)
+                    ia_comp.effet_actif = "AUCUN"
+                    ia_comp.save()
+                    action_supp = f" 🎁 +{de_ia} cases bonus (Tous immunisés)"
             
-            tous_pour_ia = PartieJoueur.objects.filter(partie_id=partie_id).order_by('ordre_tour')
-            for p in tous_pour_ia:
-                if getattr(p, 'effet_actif', '') != "BOUCLIER": 
-                    cibles_echange.append(p)
-                    if p.id != ia.id:
-                        cibles_normales.append(p)
-                        
-            if effet_attente_ia == "CIBLE_ECHANGE" and len(cibles_echange) >= 2:
-                cibles = random.sample(cibles_echange, 2)
-                MoteurJeuService.appliquer_effet_interactif(ia.id, cibles[0].id, cibles[1].id)
-                nom1 = cibles[0].nom_ia if cibles[0].est_ia else "Vous"
-                nom2 = cibles[1].nom_ia if cibles[1].est_ia else "Vous"
-                action_supp = f" 🔄 Échange {nom1} avec {nom2}"
-            elif effet_attente_ia != "CIBLE_ECHANGE" and cibles_normales:
-                cible_choisie = random.choice(cibles_normales)
-                MoteurJeuService.appliquer_effet_interactif(ia.id, cible_choisie.id, None)
-                nom_cible = cible_choisie.nom_ia if cible_choisie.est_ia else "Vous"
-                action_supp = f" 🎯 Cible {nom_cible} avec {effet_attente_ia}"
-            else:
-                ia_comp = PartieJoueur.objects.get(id=ia.id)
-                ia_comp.position_plateau = min(taille_plateau, ia_comp.position_plateau + de_ia)
-                ia_comp.effet_actif = "AUCUN"
-                ia_comp.save()
-                action_supp = f" 🎁 +{de_ia} cases bonus (Tous immunisés)"
+            # 👉 LE BOT JOUE LE SUPER BONUS SOUS DJANGO SANS RESTRICTION
+            elif effet_attente_ia == "SUPER_BONUS":
+                reussite_sb = (random.randint(0, 99) >= 30) # 70% de chance
+                de_sb = random.randint(1, 6) # Pari de 1 à 6
+                
+                effets_dispos = ["AUCUN", "SPRINT", "CIBLE_RECUL", "CIBLE_PASSE_TOUR", "CIBLE_PRESSION", "CIBLE_ECHANGE"]
+                effet_choisi = random.choice(effets_dispos)
+                
+                ia_sb = PartieJoueur.objects.get(id=ia.id)
+                if reussite_sb:
+                    ia_sb.position_plateau = min(taille_plateau, ia_sb.position_plateau + de_sb)
+                    
+                    if effet_choisi.startswith("CIBLE_"):
+                        cibles_normales = []
+                        cibles_echange = []
+                        tous_pour_sb = PartieJoueur.objects.filter(partie_id=partie_id).order_by('ordre_tour')
+                        for p in tous_pour_sb:
+                            if getattr(p, 'effet_actif', '') != "BOUCLIER":
+                                cibles_echange.append(p)
+                                if p.id != ia_sb.id:
+                                    cibles_normales.append(p)
+                                    
+                        if effet_choisi == "CIBLE_ECHANGE" and len(cibles_echange) >= 2:
+                            cibles = random.sample(cibles_echange, 2)
+                            MoteurJeuService.appliquer_effet_interactif(ia_sb.id, cibles[0].id, cibles[1].id)
+                            nom1 = cibles[0].nom_ia if cibles[0].est_ia else "Vous"
+                            nom2 = cibles[1].nom_ia if cibles[1].est_ia else "Vous"
+                            action_supp = f" 🌟 SUPER BONUS ! Avance de {de_sb} et 🔄 Échange {nom1} avec {nom2}"
+                            ia_sb.effet_actif = "AUCUN"
+                        elif effet_choisi != "CIBLE_ECHANGE" and cibles_normales:
+                            cible_choisie = random.choice(cibles_normales)
+                            MoteurJeuService.appliquer_effet_interactif(ia_sb.id, cible_choisie.id, None)
+                            nom_cible = cible_choisie.nom_ia if cible_choisie.est_ia else "Vous"
+                            action_supp = f" 🌟 SUPER BONUS ! Avance de {de_sb} et 🎯 Cible {nom_cible} avec {effet_choisi}"
+                            ia_sb.effet_actif = "AUCUN"
+                        else:
+                            ia_sb.effet_actif = "BOUCLIER"
+                            ia_sb.duree_effet = 2
+                            action_supp = f" 🌟 SUPER BONUS ! Avance de {de_sb} (Pas de cible dispo, gagne un Bouclier)"
+                    else:
+                        ia_sb.effet_actif = effet_choisi
+                        ia_sb.duree_effet = 2 if effet_choisi == "BOUCLIER" else 1
+                        action_supp = f" 🌟 SUPER BONUS ! Avance de {de_sb} et gagne l'effet {effet_choisi}"
+                else:
+                    ia_sb.effet_actif = "BOUCLIER"
+                    ia_sb.duree_effet = 2
+                    action_supp = " 🌟 SUPER BONUS Raté ! Gagne un bouclier."
+                ia_sb.save()
 
         ia.refresh_from_db()
         pos_apres = ia.position_plateau
@@ -266,6 +313,8 @@ class JeuAPIView(APIView):
 
         joueur_humain = PartieJoueur.objects.filter(partie=partie, est_ia=False).first()
 
+        enregistrer_dans_historique(partie.id, "🎮 DÉBUT DE LA PARTIE\n")
+
         return Response({
             "partieId": partie.id,
             "joueurId": joueur_humain.id if joueur_humain else None, 
@@ -333,6 +382,16 @@ class RepondreAPIView(APIView):
                 taille_plateau = max([int(k) for k in plateau_actuel.keys()]) + 1 if plateau_actuel else 50
                 logs_ia, pt, nv = faire_jouer_bots(partie_id, taille_plateau, plateau_actuel)
                 
+                log_tour = ["--------------------------------------------------", "👤 TOUR DE : VOUS", "🛑 Vous avez passé votre tour à cause du Malus."]
+                if logs_ia: log_tour.extend(logs_ia)
+                enregistrer_dans_historique(partie_id, "\n".join(log_tour) + "\n")
+                
+                # 👉 INCRÉMENTATION DU TOUR
+                partie_db = Partie.objects.get(id=partie_id)
+                if partie_db.statut != "TERMINEE":
+                    partie_db.tour_actuel += 1
+                    partie_db.save()
+
                 return Response({
                     "etaitBonneReponse": False,
                     "valeurDe": 0,
@@ -393,7 +452,6 @@ class RepondreAPIView(APIView):
             doit_attendre_cible = False
             effet_attente = resultat_humain.get("effet_en_attente")
             
-            # 👉 CORRECTION BUG SUPER BONUS : C'est ici que l'on indique aux bots de faire une pause !
             if effet_attente:
                 if effet_attente.startswith("CIBLE_"):
                     tous_j = PartieJoueur.objects.filter(partie_id=partie_id)
@@ -428,12 +486,14 @@ class RepondreAPIView(APIView):
             partie_terminee = victoire_humain
             nom_vainqueur = "Vous" if victoire_humain else ""
             
-            # 👉 CORRECTION DU BUG SILENCIEUX : Sauvegarde si le joueur humain gagne !
+            # 👉 CORRECTION 3 : GESTION DB DU TOUR ET DE LA VICTOIRE
+            partie_db = Partie.objects.get(id=partie_id)
             if victoire_humain:
-                partie_db = Partie.objects.get(id=partie_id)
                 partie_db.statut = "TERMINEE"
                 partie_db.vainqueur = joueur.utilisateur
-                partie_db.save()
+            elif not doit_attendre_cible and not a_droit_deuxieme_chance:
+                partie_db.tour_actuel += 1
+            partie_db.save()
             
             if not a_droit_deuxieme_chance and not victoire_humain and not doit_attendre_cible:
                 logs_ia, pt, nv = faire_jouer_bots(partie_id, taille_plateau, plateau_actuel)
@@ -445,6 +505,20 @@ class RepondreAPIView(APIView):
                 logs_ia.append("✨ Deuxième chance activée ! Les bots attendent votre nouvelle tentative.")
 
             joueur_post_bots = PartieJoueur.objects.get(id=joueur_id)
+
+            log_tour = []
+            log_tour.append("--------------------------------------------------")
+            log_tour.append("👤 TOUR DE : VOUS")
+            log_tour.append(f"❓ Q : {question.texte_question}")
+            r_str = brute if brute else "Passé"
+            log_tour.append(f"💬 R : {r_str} -> {'✅ Juste' if est_correct else '❌ Faux'}")
+            log_tour.append(f"🎲 Dé: {valeur_de} | 📍 Case {pos_avant_bots}")
+            
+            if resultat_humain.get("messageEffet"):
+                log_tour.append(f"✨ {resultat_humain.get('messageEffet')}")
+            if logs_ia:
+                log_tour.extend(logs_ia)
+            enregistrer_dans_historique(partie_id, "\n".join(log_tour) + "\n")
 
             return Response({
                 "etaitBonneReponse": est_correct,
@@ -512,6 +586,10 @@ class AppliquerEffetAPIView(APIView):
             taille_plateau = max([int(k) for k in plateau_actuel.keys()]) + 1 if plateau_actuel else 50
             
             logs_ia, pt, nv = faire_jouer_bots(partie_id, taille_plateau, plateau_actuel)
+
+            log_tour = ["--------------------------------------------------", "👤 TOUR DE : VOUS", "🎯 ACTION : Vous avez appliqué votre effet interactif."]
+            if logs_ia: log_tour.extend(logs_ia)
+            enregistrer_dans_historique(partie_id, "\n".join(log_tour) + "\n")
 
             return Response({
                 "logsIA": logs_ia,
@@ -638,6 +716,19 @@ class RepondreSuperBonusAPIView(APIView):
                     partie_terminee = True
                     nom_vainqueur = nv
 
+            log_tour = []
+            log_tour.append("--------------------------------------------------")
+            log_tour.append("👤 TOUR DE : VOUS (SUPER BONUS)")
+            log_tour.append(f"❓ Q : {question.texte_question}")
+            r_str = brute if brute else "Passé"
+            log_tour.append(f"💬 R : {r_str} -> {'✅ Juste' if est_correct else '❌ Faux'}")
+            log_tour.append(f"🎲 Dé (Points choisis): {points_choisis} | 📍 Case {pos_avant_bots}")
+            if message_effet:
+                log_tour.append(f"✨ {message_effet}")
+            if logs_ia:
+                log_tour.extend(logs_ia)
+            enregistrer_dans_historique(partie_id, "\n".join(log_tour) + "\n")
+
             return Response({
                 "etaitBonneReponse": est_correct,
                 "valeurDe": points_choisis if est_correct else 0,
@@ -656,10 +747,7 @@ class RepondreSuperBonusAPIView(APIView):
 
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
-# ==========================================
-# 🔐 VUE D'AUTHENTIFICATION
-# ==========================================
+
 # ==========================================
 # 🔐 VUES D'AUTHENTIFICATION (Classique & OAuth2)
 # ==========================================
@@ -737,7 +825,6 @@ class GoogleCallbackView(APIView):
         if not code:
             return redirect(f"{settings.ANGULAR_LOGIN_URL}?error=AccessDenied")
 
-        # Échange du code contre un Access Token
         token_data = {
             'code': code,
             'client_id': settings.GOOGLE_CLIENT_ID,
@@ -748,21 +835,18 @@ class GoogleCallbackView(APIView):
         token_res = requests.post('https://oauth2.googleapis.com/token', data=token_data)
         access_token = token_res.json().get('access_token')
 
-        # Récupération des infos utilisateur
         user_res = requests.get('https://www.googleapis.com/oauth2/v3/userinfo', headers={'Authorization': f'Bearer {access_token}'})
         user_info = user_res.json()
 
         email = user_info.get('email')
         pseudo = user_info.get('name', f"Joueur_{email.split('@')[0]}")
 
-        # Création ou récupération
         user, created = Utilisateur.objects.get_or_create(
             email=email,
             defaults={'pseudo': pseudo, 'mot_de_passe': str(uuid.uuid4()), 'role': 'ROLE_USER'}
         )
 
         token = JwtService.generer_token(user)
-        # 👉 CORRECTION : Envoi de toutes les données
         pseudo_encode = urllib.parse.quote(user.pseudo)
         return redirect(f"{settings.ANGULAR_LOGIN_URL}?token={token}&id={user.id}&pseudo={pseudo_encode}&role={user.role}")
 
@@ -787,7 +871,6 @@ class GithubCallbackView(APIView):
         if not code:
             return redirect(f"{settings.ANGULAR_LOGIN_URL}?error=AccessDenied")
 
-        # Échange du code
         token_data = {
             'code': code,
             'client_id': settings.GITHUB_CLIENT_ID,
@@ -798,14 +881,12 @@ class GithubCallbackView(APIView):
         token_res = requests.post('https://github.com/login/oauth/access_token', data=token_data, headers=headers)
         access_token = token_res.json().get('access_token')
 
-        # Récupération des infos
         user_res = requests.get('https://api.github.com/user', headers={'Authorization': f'Bearer {access_token}'})
         user_info = user_res.json()
 
         pseudo = user_info.get('login')
         email = user_info.get('email')
 
-        # GitHub peut cacher l'email, il faut forcer la recherche si c'est le cas
         if not email:
             email_res = requests.get('https://api.github.com/user/emails', headers={'Authorization': f'Bearer {access_token}'})
             primary_email = next((e for e in email_res.json() if e.get('primary')), None)
@@ -817,7 +898,5 @@ class GithubCallbackView(APIView):
         )
 
         token = JwtService.generer_token(user)
-        # 👉 CORRECTION : Envoi de toutes les données
         pseudo_encode = urllib.parse.quote(user.pseudo)
         return redirect(f"{settings.ANGULAR_LOGIN_URL}?token={token}&id={user.id}&pseudo={pseudo_encode}&role={user.role}")
-        

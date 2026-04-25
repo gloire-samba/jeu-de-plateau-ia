@@ -12,15 +12,26 @@
         <th>ID</th>
         <th>Statut</th>
         <th>Tour Actuel</th>
+        <th>Historique</th> 
         <th *ngIf="authService.isAdmin()">Actions Admin</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let p of parties">
         <td>{{ p.id }}</td>
-        <td><span class="badge">{{ p.statut }}</span></td>
-        <td>Tour {{ p.tourActuel || p.tour_actuel }}</td>
+        <td>
+          <span class="badge" [ngClass]="p.statut === 'TERMINEE' ? 'badge-terminee' : 'badge-encours'">
+            {{ p.statut }}
+          </span>
+        </td>
+        <td>Tour {{ p.tourActuel || p.tour_actuel || 1 }}</td>
         
+        <td>
+          <button class="btn-history" (click)="router.navigate(['/parties', p.id, 'historique'])">
+            📜 Voir l'historique
+          </button>
+        </td>
+
         <td *ngIf="authService.isAdmin()">
           <button class="btn-edit" (click)="router.navigate(['/admin/parties/modifier', p.id])">✏️ Modifier</button>
           <button class="btn-delete" (click)="supprimer(p.id)">🗑️ Supprimer</button>

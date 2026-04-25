@@ -1,0 +1,21 @@
+.liste-container { padding: 2rem; max-width: 1000px; margin: 0 auto; }
+.header-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+
+.historique-texte {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  white-space: pre-wrap; /* Le secret pour garder les sauts de ligne ! */
+  line-height: 1.5;
+  border: 1px solid #334155;
+  min-height: 400px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.btn-secondaire {
+  background: white; color: #475569; border: 1px solid #cbd5e1;
+  padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer;
+}
+.btn-secondaire:hover { background: #f1f5f9; color: #0f172a; }

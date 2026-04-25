@@ -53,7 +53,7 @@ class PartieCrudSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'code_rejoindre', 'statut', 'date_creation', 
             'tour_actuel', 'createur', 'pseudoCreateur', 
-            'vainqueur', 'pseudoVainqueur'
+            'vainqueur', 'pseudoVainqueur', 'historique'
         ]
 
 class PartieJoueurCrudSerializer(serializers.ModelSerializer):

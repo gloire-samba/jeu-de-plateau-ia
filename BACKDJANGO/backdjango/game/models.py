@@ -39,6 +39,9 @@ class Partie(models.Model):
     date_creation = models.DateTimeField(auto_now_add=True)
     tour_actuel = models.IntegerField(default=1)
     
+    # 👉 NOUVEAU : Champ pour stocker les logs de la partie
+    historique = models.TextField(default="", blank=True)
+    
     createur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE, related_name='parties_creees')
     vainqueur = models.ForeignKey(Utilisateur, on_delete=models.SET_NULL, null=True, blank=True, related_name='parties_gagnees')
     questions_posees = models.ManyToManyField(Question, blank=True)

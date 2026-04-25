@@ -131,6 +131,15 @@ public class JeuRestController {
         private String effetChoisi;
     }
 
+    private void enregistrerDansHistorique(Long partieId, String message) {
+        Partie partie = partieRepository.findById(partieId).orElse(null);
+        if (partie != null) {
+            String ancienHisto = partie.getHistorique() != null ? partie.getHistorique() : "";
+            partie.setHistorique(ancienHisto + message + "\n");
+            partieRepository.save(partie);
+        }
+    }
+
     private String genererIndice(String reponse) {
         if (reponse == null || reponse.isEmpty()) return "";
         StringBuilder sb = new StringBuilder();
@@ -204,33 +213,89 @@ public class JeuRestController {
                 );
                 
                 String actionSupp = "";
-                if (resultatIa.effetEnAttente() != null && resultatIa.effetEnAttente().name().startsWith("CIBLE_")) {
-                    List<PartieJoueur> ciblesNormales = new ArrayList<>();
-                    List<PartieJoueur> ciblesEchange = new ArrayList<>();
-                    
-                    for (PartieJoueur p : joueurRepository.findByPartieIdOrderByOrdreTourAsc(partieId)) {
-                        if (!"BOUCLIER".equals(p.getEffetActif())) {
-                            ciblesEchange.add(p);
-                            if (!p.getId().equals(ia.getId())) ciblesNormales.add(p);
+                if (resultatIa.effetEnAttente() != null) {
+                    if (resultatIa.effetEnAttente().name().startsWith("CIBLE_")) {
+                        List<PartieJoueur> ciblesNormales = new ArrayList<>();
+                        List<PartieJoueur> ciblesEchange = new ArrayList<>();
+                        
+                        for (PartieJoueur p : joueurRepository.findByPartieIdOrderByOrdreTourAsc(partieId)) {
+                            if (!"BOUCLIER".equals(p.getEffetActif())) {
+                                ciblesEchange.add(p);
+                                if (!p.getId().equals(ia.getId())) ciblesNormales.add(p);
+                            }
                         }
-                    }
-                    
-                    if (resultatIa.effetEnAttente().name().equals("CIBLE_ECHANGE") && ciblesEchange.size() >= 2) {
-                        Collections.shuffle(ciblesEchange);
-                        moteurJeuService.appliquerEffetInteractif(ia.getId(), ciblesEchange.get(0).getId(), ciblesEchange.get(1).getId());
-                        String n1 = ciblesEchange.get(0).isEstIa() ? ciblesEchange.get(0).getNomIa() : "Vous";
-                        String n2 = ciblesEchange.get(1).isEstIa() ? ciblesEchange.get(1).getNomIa() : "Vous";
-                        actionSupp = " 🔄 Échange " + n1 + " avec " + n2;
-                    } else if (!resultatIa.effetEnAttente().name().equals("CIBLE_ECHANGE") && !ciblesNormales.isEmpty()) {
-                        PartieJoueur c = ciblesNormales.get(rand.nextInt(ciblesNormales.size()));
-                        moteurJeuService.appliquerEffetInteractif(ia.getId(), c.getId(), null);
-                        actionSupp = " 🎯 Cible " + (c.isEstIa() ? c.getNomIa() : "Vous") + " avec " + resultatIa.effetEnAttente().name();
-                    } else {
-                        PartieJoueur iaComp = joueurRepository.findById(ia.getId()).get();
-                        iaComp.setPositionPlateau(Math.min(taillePlateau, iaComp.getPositionPlateau() + deIa));
-                        iaComp.setEffetActif("AUCUN");
-                        joueurRepository.save(iaComp);
-                        actionSupp = " 🎁 +" + deIa + " cases bonus (Tous immunisés)";
+                        
+                        if (resultatIa.effetEnAttente().name().equals("CIBLE_ECHANGE") && ciblesEchange.size() >= 2) {
+                            Collections.shuffle(ciblesEchange);
+                            moteurJeuService.appliquerEffetInteractif(ia.getId(), ciblesEchange.get(0).getId(), ciblesEchange.get(1).getId());
+                            String n1 = ciblesEchange.get(0).isEstIa() ? ciblesEchange.get(0).getNomIa() : "Vous";
+                            String n2 = ciblesEchange.get(1).isEstIa() ? ciblesEchange.get(1).getNomIa() : "Vous";
+                            actionSupp = " 🔄 Échange " + n1 + " avec " + n2;
+                        } else if (!resultatIa.effetEnAttente().name().equals("CIBLE_ECHANGE") && !ciblesNormales.isEmpty()) {
+                            PartieJoueur c = ciblesNormales.get(rand.nextInt(ciblesNormales.size()));
+                            moteurJeuService.appliquerEffetInteractif(ia.getId(), c.getId(), null);
+                            actionSupp = " 🎯 Cible " + (c.isEstIa() ? c.getNomIa() : "Vous") + " avec " + resultatIa.effetEnAttente().name();
+                        } else {
+                            PartieJoueur iaComp = joueurRepository.findById(ia.getId()).get();
+                            iaComp.setPositionPlateau(Math.min(taillePlateau, iaComp.getPositionPlateau() + deIa));
+                            iaComp.setEffetActif("AUCUN");
+                            joueurRepository.save(iaComp);
+                            actionSupp = " 🎁 +" + deIa + " cases bonus (Tous immunisés)";
+                        }
+                    } 
+                    // 👉 LE BOT JOUE LE SUPER BONUS SANS AUCUNE RESTRICTION
+                    else if (resultatIa.effetEnAttente() == TypeEffet.SUPER_BONUS) {
+                        boolean reussiteSuperBonus = (rand.nextInt(100) >= 30); // 70% de réussite
+                        int deSuperBonus = rand.nextInt(6) + 1; // Pari complet de 1 à 6
+                        
+                        // L'IA a accès à TOUS les effets
+                        String[] effetsDispos = {"AUCUN", "SPRINT", "CIBLE_RECUL", "CIBLE_PASSE_TOUR", "CIBLE_PRESSION", "CIBLE_ECHANGE"};
+                        String effetChoisi = effetsDispos[rand.nextInt(effetsDispos.length)];
+                        
+                        PartieJoueur iaSB = joueurRepository.findById(ia.getId()).get();
+                        
+                        if (reussiteSuperBonus) {
+                            iaSB.setPositionPlateau(Math.min(taillePlateau, iaSB.getPositionPlateau() + deSuperBonus));
+                            
+                            // Si l'IA a choisi une attaque
+                            if (effetChoisi.startsWith("CIBLE_")) {
+                                List<PartieJoueur> ciblesNormales = new ArrayList<>();
+                                List<PartieJoueur> ciblesEchange = new ArrayList<>();
+                                for (PartieJoueur p : joueurRepository.findByPartieIdOrderByOrdreTourAsc(partieId)) {
+                                    if (!"BOUCLIER".equals(p.getEffetActif())) {
+                                        ciblesEchange.add(p);
+                                        if (!p.getId().equals(iaSB.getId())) ciblesNormales.add(p);
+                                    }
+                                }
+                                
+                                if (effetChoisi.equals("CIBLE_ECHANGE") && ciblesEchange.size() >= 2) {
+                                    Collections.shuffle(ciblesEchange);
+                                    moteurJeuService.appliquerEffetInteractif(iaSB.getId(), ciblesEchange.get(0).getId(), ciblesEchange.get(1).getId());
+                                    String n1 = ciblesEchange.get(0).isEstIa() ? ciblesEchange.get(0).getNomIa() : "Vous";
+                                    String n2 = ciblesEchange.get(1).isEstIa() ? ciblesEchange.get(1).getNomIa() : "Vous";
+                                    actionSupp = " 🌟 SUPER BONUS ! Avance de " + deSuperBonus + " et 🔄 Échange " + n1 + " avec " + n2;
+                                    iaSB.setEffetActif("AUCUN");
+                                } else if (!effetChoisi.equals("CIBLE_ECHANGE") && !ciblesNormales.isEmpty()) {
+                                    PartieJoueur c = ciblesNormales.get(rand.nextInt(ciblesNormales.size()));
+                                    moteurJeuService.appliquerEffetInteractif(iaSB.getId(), c.getId(), null);
+                                    actionSupp = " 🌟 SUPER BONUS ! Avance de " + deSuperBonus + " et 🎯 Cible " + (c.isEstIa() ? c.getNomIa() : "Vous") + " avec " + effetChoisi;
+                                    iaSB.setEffetActif("AUCUN");
+                                } else {
+                                    iaSB.setEffetActif("BOUCLIER");
+                                    iaSB.setDureeEffet(2);
+                                    actionSupp = " 🌟 SUPER BONUS ! Avance de " + deSuperBonus + " (Pas de cible dispo, gagne un Bouclier)";
+                                }
+                            } else {
+                                iaSB.setEffetActif(effetChoisi);
+                                iaSB.setDureeEffet("BOUCLIER".equals(effetChoisi) ? 2 : 1);
+                                actionSupp = " 🌟 SUPER BONUS ! Avance de " + deSuperBonus + " et gagne l'effet " + effetChoisi;
+                            }
+                        } else {
+                            iaSB.setEffetActif("BOUCLIER");
+                            iaSB.setDureeEffet(2);
+                            actionSupp = " 🌟 SUPER BONUS Raté ! Gagne un bouclier.";
+                        }
+                        joueurRepository.save(iaSB);
                     }
                 }
 
@@ -328,6 +393,8 @@ public class JeuRestController {
                 break;
             }
         }
+        
+        enregistrerDansHistorique(partie.getId(), "🎮 DÉBUT DE LA PARTIE\n");
 
         Map<String, Object> response = new HashMap<>();
         response.put("partieId", partie.getId());
@@ -402,6 +469,24 @@ public class JeuRestController {
             int taillePlateau = plateauActuel.isEmpty() ? 50 : Collections.max(plateauActuel.keySet()) + 1;
             faireJouerBots(request.getPartieId(), response, taillePlateau, plateauActuel);
             
+            StringBuilder logTourComplet = new StringBuilder();
+            logTourComplet.append("--------------------------------------------------\n");
+            logTourComplet.append("👤 TOUR DE : VOUS\n");
+            logTourComplet.append("🛑 Vous avez passé votre tour à cause du Malus.\n");
+            if (response.getLogsIA() != null) {
+                for (String logBot : response.getLogsIA()) {
+                    logTourComplet.append(logBot).append("\n");
+                }
+            }
+            enregistrerDansHistorique(request.getPartieId(), logTourComplet.toString());
+
+            // Incrémentation du tour
+            Partie partie = partieRepository.findById(request.getPartieId()).orElse(null);
+            if (partie != null && !"TERMINEE".equals(partie.getStatut())) {
+                partie.setTourActuel(partie.getTourActuel() + 1);
+                partieRepository.save(partie);
+            }
+
             return ResponseEntity.ok(response);
         }
 
@@ -488,10 +573,38 @@ public class JeuRestController {
         PartieJoueur jActuelPostBots = joueurRepository.findById(request.getJoueurId()).orElseThrow();
         response.setNouvellePosition(jActuelPostBots.getPositionPlateau());
 
-        if (resultat.victoire()) {
-            response.setPartieTerminee(true);
-            response.setNomVainqueur("Vous");
+        // 👉 CORRECTION 1 : SAUVEGARDE DE LA VICTOIRE DE L'HUMAIN + INCRÉMENTATION DU TOUR
+        Partie partieDb = partieRepository.findById(request.getPartieId()).orElse(null);
+        if (partieDb != null) {
+            if (resultat.victoire()) {
+                response.setPartieTerminee(true);
+                response.setNomVainqueur("Vous");
+                partieDb.setStatut("TERMINEE");
+                partieDb.setVainqueur(jActuelPostBots.getUtilisateur());
+            } else if (!doitAttendreCible && !resultat.aDroitDeuxiemeChance()) {
+                partieDb.setTourActuel(partieDb.getTourActuel() + 1); // +1 Seulement à la fin du tour complet
+            }
+            partieRepository.save(partieDb);
         }
+
+        StringBuilder logTourComplet = new StringBuilder();
+        logTourComplet.append("--------------------------------------------------\n");
+        logTourComplet.append("👤 TOUR DE : VOUS\n");
+        logTourComplet.append("❓ Q : ").append(vraieQuestion.getTexteQuestion()).append("\n");
+        logTourComplet.append("💬 R : ").append(reponseBrute.isEmpty() ? "Passé" : reponseBrute)
+                      .append(" -> ").append(estBonneReponse ? "✅ Juste" : "❌ Faux").append("\n");
+        logTourComplet.append("🎲 Dé: ").append(valeurDe).append(" | 📍 Case ").append(jPostReponse.getPositionPlateau()).append("\n");
+
+        if (resultat.messageEffet() != null && !resultat.messageEffet().isEmpty()) {
+            logTourComplet.append("✨ ").append(resultat.messageEffet()).append("\n");
+        }
+
+        if (response.getLogsIA() != null) {
+            for (String logBot : response.getLogsIA()) {
+                logTourComplet.append(logBot).append("\n");
+            }
+        }
+        enregistrerDansHistorique(request.getPartieId(), logTourComplet.toString());
 
         return ResponseEntity.ok(response);
     }
@@ -512,6 +625,18 @@ public class JeuRestController {
         int taillePlateau = plateauActuel.isEmpty() ? 50 : Collections.max(plateauActuel.keySet()) + 1;
         
         faireJouerBots(partieId, response, taillePlateau, plateauActuel);
+
+        StringBuilder logTourComplet = new StringBuilder();
+        logTourComplet.append("--------------------------------------------------\n");
+        logTourComplet.append("👤 TOUR DE : VOUS\n");
+        logTourComplet.append("🎯 ACTION : Vous avez appliqué votre effet interactif.\n");
+        if (response.getLogsIA() != null) {
+            for (String logBot : response.getLogsIA()) {
+                logTourComplet.append(logBot).append("\n");
+            }
+        }
+        enregistrerDansHistorique(partieId, logTourComplet.toString());
+
         return ResponseEntity.ok(response);
     }
 
@@ -635,6 +760,25 @@ public class JeuRestController {
             response.setPartieTerminee(true);
             response.setNomVainqueur("Vous");
         }
+
+        StringBuilder logTourComplet = new StringBuilder();
+        logTourComplet.append("--------------------------------------------------\n");
+        logTourComplet.append("👤 TOUR DE : VOUS (SUPER BONUS)\n");
+        logTourComplet.append("❓ Q : ").append(vraieQuestion.getTexteQuestion()).append("\n");
+        logTourComplet.append("💬 R : ").append(reponseBrute.isEmpty() ? "Passé" : reponseBrute)
+                      .append(" -> ").append(estBonneReponse ? "✅ Juste" : "❌ Faux").append("\n");
+        logTourComplet.append("🎲 Dé (Points choisis): ").append(req.getPointsChoisis()).append(" | 📍 Case ").append(joueur.getPositionPlateau()).append("\n");
+
+        if (messageEffet != null && !messageEffet.isEmpty()) {
+            logTourComplet.append("✨ ").append(messageEffet).append("\n");
+        }
+
+        if (response.getLogsIA() != null) {
+            for (String logBot : response.getLogsIA()) {
+                logTourComplet.append(logBot).append("\n");
+            }
+        }
+        enregistrerDansHistorique(req.getPartieId(), logTourComplet.toString());
 
         return ResponseEntity.ok(response);
     }

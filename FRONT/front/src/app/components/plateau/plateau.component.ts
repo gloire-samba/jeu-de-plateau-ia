@@ -480,12 +480,15 @@ export class PlateauComponent implements OnInit, OnDestroy {
     if (res.logsIA && res.logsIA.length > 0) {
       res.logsIA.forEach((log: string) => {
         this.ajouterLog(log);
-        if (log.includes('Vous') && (log.includes('Cible') || log.includes('Échange') || log.includes('EXPLOSION'))) {
-          const textePropre = log.replace('🤖 ', '');
-          this.ajouterAlerte(`⚠️ Aïe ! ${textePropre}`, 'danger', 6000);
+        
+        // 👉 CORRECTION ICI : Détection sans se baser sur l'émoji '🤖'
+        if (log.includes('Vous') && (log.includes('Cible') || log.includes('Échange'))) {
+          const parties = log.split('|');
+          const action = parties[parties.length - 1].trim();
+          this.ajouterAlerte(`⚠️ Aïe ! Un bot a joué : ${action}`, 'danger', 6000);
         }
-        else if (log.includes('EXPLOSION') && log.includes('🤖')) {
-          this.ajouterAlerte(`💣 BOUM ! Un bot a déclenché une explosion, tout le monde recule de 3 cases !`, 'danger', 6000);
+        else if (log.includes('EXPLOSION') && log.includes('Les autres joueurs reculent')) {
+          this.ajouterAlerte(`💣 BOUM ! Un bot a déclenché une explosion, tout le monde recule !`, 'danger', 7000);
         }
       });
     }

@@ -26,6 +26,7 @@ import { AdminCaseFormComponent } from './components/admin-case-form/admin-case-
 
 // --- LES GARDIENS (SÉCURITÉ) ---
 import { authGuard, adminGuard } from './guards/auth.guard';
+import { HistoriquePartieComponent } from './components/historique-partie/historique-partie.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -60,6 +61,8 @@ export const routes: Routes = [
 
   { path: 'admin/partie-joueurs/ajouter', component: AdminPartieJoueurFormComponent, canActivate: [adminGuard] },
   { path: 'admin/partie-joueurs/modifier/:id', component: AdminPartieJoueurFormComponent, canActivate: [adminGuard] },
+
+  { path: 'parties/:id/historique', component: HistoriquePartieComponent },
 
   // 🔄 REDIRECTIONS
   { path: '', redirectTo: '/login', pathMatch: 'full' },

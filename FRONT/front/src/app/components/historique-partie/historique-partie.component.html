@@ -1,0 +1,10 @@
+<div class="liste-container" *ngIf="partie">
+  <div class="header-actions">
+    <h2>📜 Historique de la Partie #{{ partie.id }}</h2>
+    <button class="btn-secondaire" (click)="retour()">Retour</button>
+  </div>
+
+  <div class="historique-texte">
+    {{ partie.historique || 'Aucun historique disponible pour cette partie (ou partie très ancienne).' }}
+  </div>
+</div>

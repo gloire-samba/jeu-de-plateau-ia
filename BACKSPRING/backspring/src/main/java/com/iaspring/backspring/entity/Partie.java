@@ -39,6 +39,10 @@ public class Partie {
     @JoinColumn(name = "vainqueur_id")
     private Utilisateur vainqueur;
 
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String historique = ""; // Initialisé vide
+
     @ManyToMany
     @JoinTable(
         name = "PARTIE_QUESTION_HISTORIQUE",

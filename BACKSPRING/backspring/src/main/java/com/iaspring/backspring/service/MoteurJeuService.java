@@ -42,20 +42,13 @@ public class MoteurJeuService {
         if ("CIBLE_ECHANGE".equals(effet) && cible1Id != null && cible2Id != null) {
             PartieJoueur c1 = joueurRepository.findById(cible1Id).orElseThrow();
             PartieJoueur c2 = joueurRepository.findById(cible2Id).orElseThrow();
-            
-            int anciennePos1 = c1.getPositionPlateau();
-            int anciennePos2 = c2.getPositionPlateau();
-
             int pos1 = c1.getPositionPlateau();
             c1.setPositionPlateau(c2.getPositionPlateau());
             c2.setPositionPlateau(pos1);
-            
             joueurRepository.save(c1);
             joueurRepository.save(c2);
-            
         } else if (effet != null && effet.startsWith("CIBLE_") && cible1Id != null) {
             PartieJoueur cible = joueurRepository.findById(cible1Id).orElseThrow();
-            
             switch (effet) {
                 case "CIBLE_RECUL":
                     reculerJoueur(cible, 3);
@@ -74,7 +67,7 @@ public class MoteurJeuService {
             joueurRepository.save(cible);
         }
 
-        if (lanceur.getEffetActif() != null && !lanceur.getEffetActif().equals("BONUS_PRESSION")) {
+        if (!"BONUS_PRESSION".equals(lanceur.getEffetActif())) {
             lanceur.setEffetActif("AUCUN");
         }
         joueurRepository.save(lanceur);
@@ -84,8 +77,6 @@ public class MoteurJeuService {
     public ResultatTour traiterReponse(Long partieId, Long joueurId, boolean estBonneReponse, int valeurDe, Map<Integer, CasePlateau> plateau, int taillePlateau) {
         PartieJoueur joueurActuel = joueurRepository.findById(joueurId).orElseThrow();
         List<PartieJoueur> tousLesJoueurs = joueurRepository.findByPartieIdOrderByOrdreTourAsc(partieId);
-        
-        String nomJoueur = joueurActuel.isEstIa() ? joueurActuel.getNomIa() : joueurActuel.getUtilisateur().getPseudo();
         
         TypeEffet effetDepart = getEffetForPosition(joueurActuel.getPositionPlateau(), plateau);
         
@@ -136,11 +127,12 @@ public class MoteurJeuService {
             }
 
             if (effetDepart == TypeEffet.RISQUE_EXPLOSIF) {
-                messageEffet = "💣 EXPLOSION ! Les autres joueurs reculent.";
+                int reculZone = valeurDe * 2; 
+                messageEffet = "💣 EXPLOSION ! Les autres joueurs reculent de " + reculZone + " cases.";
                 for (PartieJoueur j : tousLesJoueurs) {
                     if (!j.getId().equals(joueurActuel.getId())) {
                         if (!"BOUCLIER".equals(j.getEffetActif())) {
-                            reculerJoueur(j, 3);
+                            reculerJoueur(j, reculZone);
                             joueurRepository.save(j);
                         }
                     }
@@ -153,27 +145,31 @@ public class MoteurJeuService {
                 case BOUCLIER:
                     joueurActuel.setEffetActif("BOUCLIER");
                     joueurActuel.setDureeEffet(2);
-                    messageEffet = "🛡️ Bouclier activé !";
+                    messageEffet += (messageEffet.isEmpty() ? "" : " | ") + "🛡️ Bouclier activé !";
                     break;
                 case INDICE:
                     joueurActuel.setEffetActif("INDICE");
                     joueurActuel.setDureeEffet(2);
-                    messageEffet = "💡 Indice gagné !";
+                    messageEffet += (messageEffet.isEmpty() ? "" : " | ") + "💡 Indice gagné !";
                     break;
                 case SUPER_BONUS:
+                    effetEnAttente = effetArrivee;
+                    joueurActuel.setEffetActif(effetArrivee.name());
+                    messageEffet += (messageEffet.isEmpty() ? "" : " | ") + "🌟 Super Bonus atteint !";
+                    break;
                 case CIBLE_ECHANGE:
                 case CIBLE_RECUL:
                 case CIBLE_PASSE_TOUR:
                 case CIBLE_PRESSION:
                     effetEnAttente = effetArrivee;
                     joueurActuel.setEffetActif(effetArrivee.name());
+                    messageEffet += (messageEffet.isEmpty() ? "" : " | ") + "🎯 Préparez votre attaque !";
                     break;
                 default: break;
             }
         }
 
         if (!aDroitDeuxiemeChance && effetEnAttente == null) reduireDureeEffet(joueurActuel);
-
         joueurRepository.save(joueurActuel);
         
         return new ResultatTour(false, effetEnAttente, aDroitDeuxiemeChance, messageEffet);
