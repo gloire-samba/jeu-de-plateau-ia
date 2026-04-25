@@ -1,0 +1,29 @@
+<div class="liste-container">
+  <div class="header-actions">
+    <h2>👥 Liste des Joueurs</h2>
+    <button *ngIf="authService.isAdmin()" class="btn-add" (click)="router.navigate(['/admin/utilisateurs/ajouter'])">+ Nouvel Utilisateur</button>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Pseudo</th>
+        <th>Date d'inscription</th>
+        <th *ngIf="authService.isAdmin()">Actions (Admin)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of utilisateurs">
+        <td>{{ u.id }}</td>
+        <td><strong>{{ u.pseudo }}</strong></td>
+        <td>{{ u.dateInscription || u.date_inscription | date:'shortDate' }}</td>
+        
+        <td *ngIf="authService.isAdmin()">
+          <button class="btn-edit" (click)="router.navigate(['/admin/utilisateurs/modifier', u.id])">✏️</button>
+          <button class="btn-delete" (click)="supprimer(u.id)">🗑️ Bannir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

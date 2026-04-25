@@ -1,0 +1,655 @@
+
+Historique
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel est le prénom du célèbre plombier rouge de Nintendo ?
+💬 R : MARIO -> ✅ Juste
+🎲 Dé: 4 | 📍 Case 0 ➡️ 4
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 4
+- Bot Alpha 1 : Case 0
+- Bot Alpha 2 : Case 0
+- Bot Alpha 3 : Case 0
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Combien de chromosomes compte l'espèce humaine en temps normal ?
+💬 R : ✅ Juste
+🎲 Dé: 3 | 📍 Case 0 ➡️ 3 | 🔄 Échange Vous avec Bot Alpha 3
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Qui a formulé la théorie de la relativité restreinte ?
+💬 R : ❌ Faux (Albert Einstein)
+🎲 Dé: 0 | 📍 Case 0 ➡️ 0
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quelle est la planète la plus proche du Soleil ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 4 ➡️ 6 | ✨ 💣 EXPLOSION ! Les autres joueurs reculent.
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : En quelle année l'homme a-t-il marché sur la Lune pour la première fois ?
+💬 R : 1969 -> ✅ Juste
+🎲 Dé: 3 | 📍 Case 0 ➡️ 3
+🎯 ACTION : 🔄 Échange de place avec Vous (Joueur) !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 6
+- Bot Alpha 1 : Case 0
+- Bot Alpha 2 : Case 0
+- Bot Alpha 3 : Case 3
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel super-héros DC vit dans la ville de Gotham City ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 0 ➡️ 2 | 🎯 Cible Bot Alpha 2 avec CIBLE_RECUL
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel tournoi du Grand Chelem se joue sur terre battue à Paris ?
+💬 R : ❌ Faux (Roland-Garros)
+🎲 Dé: 0 | 📍 Case 0 ➡️ 0
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : De quoi est principalement composé le Soleil ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 3 ➡️ 4
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Combien de joueurs composent une équipe de football sur le terrain ?
+💬 R : 11 -> ✅ Juste
+🎲 Dé: 6 | 📍 Case 6 ➡️ 12
+🎯 ACTION : 🔄 Échange de place avec Bot Alpha 3 !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 12
+- Bot Alpha 1 : Case 4
+- Bot Alpha 2 : Case 0
+- Bot Alpha 3 : Case 2
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel est le seul métal liquide à température ambiante ?
+💬 R : ✅ Juste
+🎲 Dé: 3 | 📍 Case 4 ➡️ 7 | ✨ 💣 EXPLOSION ! Les autres joueurs reculent.
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Vrai ou Faux : Le son voyage plus vite dans l'eau que dans l'air.
+💬 R : ❌ Faux (Vrai)
+🎲 Dé: 0 | 📍 Case 0 ➡️ 0
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel peintre espagnol est l'un des fondateurs du mouvement cubiste ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 0 ➡️ 2 | 🎯 Cible Vous avec CIBLE_RECUL
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel sport se pratique sur une patinoire avec un palet ?
+💬 R : Le hockey sur glace -> ✅ Juste
+🎲 Dé: 6 | 📍 Case 6 ➡️ 12
+🎯 ACTION : 🔄 Échange de place avec Bot Alpha 3 !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 12
+- Bot Alpha 1 : Case 2 (SUPER_BONUS)
+- Bot Alpha 2 : Case 0
+- Bot Alpha 3 : Case 7
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Combien de films composent la trilogie originale du Seigneur des Anneaux ?
+💬 R : ❌ Faux (3)
+🎲 Dé: 0 | 📍 Case 2 ➡️ 2
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : De quel conte populaire le personnage de Gepetto est-il issu ?
+💬 R : ❌ Faux (Pinocchio)
+🎲 Dé: 0 | 📍 Case 0 ➡️ 0
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Dans quel pays se trouve la ville de Rio de Janeiro ?
+💬 R : ✅ Juste
+🎲 Dé: 4 | 📍 Case 7 ➡️ 11
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Dans quel pays a commencé la Révolution industrielle au 18ème siècle ?
+💬 R : angleterre -> ✅ Juste
+🎲 Dé: 5 | 📍 Case 12 ➡️ 17
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 17
+- Bot Alpha 1 : Case 2 (SUPER_BONUS)
+- Bot Alpha 2 : Case 0
+- Bot Alpha 3 : Case 11
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel romancier français est l'auteur de "Germinal" ?
+💬 R : ✅ Juste
+🎲 Dé: 4 | 📍 Case 2 ➡️ 6
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quelle mer borde la côte sud de la France ?
+💬 R : ❌ Faux (La mer Méditerranée)
+🎲 Dé: 0 | 📍 Case 0 ➡️ 0
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel est le pays le plus peuplé du monde en 2023 ?
+💬 R : ✅ Juste
+🎲 Dé: 6 | 📍 Case 11 ➡️ 17
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Comment s'appelle le fleuve qui traverse Londres ?
+💬 R : tamise -> ✅ Juste
+🎲 Dé: 6 | 📍 Case 17 ➡️ 23
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 23
+- Bot Alpha 1 : Case 6 (SUPER_BONUS)
+- Bot Alpha 2 : Case 0
+- Bot Alpha 3 : Case 17
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel explorateur a découvert l'Amérique en 1492 ?
+💬 R : ❌ Faux (Christophe Colomb)
+🎲 Dé: 0 | 📍 Case 6 ➡️ 6
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Dans Star Wars, qui est le père de Luke Skywalker ?
+💬 R : ❌ Faux (Dark Vador)
+🎲 Dé: 0 | 📍 Case 0 ➡️ 0
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel peuple d'Amérique du Sud a construit le Machu Picchu ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 17 ➡️ 18 | ✨ 💡 Indice gagné !
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Qui a été le chef de file de la Révolution russe de 1917 ?
+💬 R : lenin -> ✅ Juste
+🎲 Dé: 6 | 📍 Case 23 ➡️ 29
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 29
+- Bot Alpha 1 : Case 6 (SUPER_BONUS)
+- Bot Alpha 2 : Case 0
+- Bot Alpha 3 : Case 18 (INDICE)
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Dans quelle ville se déroule le célèbre tournoi de tennis sur gazon de Wimbledon ?
+💬 R : ❌ Faux (Londres)
+🎲 Dé: 0 | 📍 Case 6 ➡️ 6
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Comment appelle-t-on la récompense attribuée au meilleur buteur européen de l'année ?
+💬 R : ✅ Juste
+🎲 Dé: 5 | 📍 Case 0 ➡️ 5
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quelle molécule est universellement connue sous la formule H2O ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 18 ➡️ 20 | ✨ 💡 Indice gagné !
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel gaz les plantes absorbent-elles lors de la photosynthèse ?
+💬 R : co2 -> ✅ Juste
+🎲 Dé: 2 | 📍 Case 29 ➡️ 31
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 31
+- Bot Alpha 1 : Case 6 (SUPER_BONUS)
+- Bot Alpha 2 : Case 5
+- Bot Alpha 3 : Case 20 (INDICE)
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel gaz les plantes absorbent-elles lors de la photosynthèse ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 6 ➡️ 7
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel célèbre mur est tombé le 9 novembre 1989 ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 5 ➡️ 7
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Combien de chromosomes compte l'espèce humaine en temps normal ?
+💬 R : ✅ Juste
+🎲 Dé: 5 | 📍 Case 20 ➡️ 25
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Vrai ou Faux : Le personnage de James Bond a été créé par Ian Fleming.
+💬 R : Vrai -> ✅ Juste
+🎲 Dé: 4 | 📍 Case 31 ➡️ 35
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 35
+- Bot Alpha 1 : Case 7 (SUPER_BONUS)
+- Bot Alpha 2 : Case 7 (SUPER_BONUS)
+- Bot Alpha 3 : Case 25
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel est le plus petit pays du monde ?
+💬 R : ✅ Juste
+🎲 Dé: 4 | 📍 Case 7 ➡️ 11
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel artiste espagnol est connu pour ses toiles surréalistes avec des horloges molles ?
+💬 R : ✅ Juste
+🎲 Dé: 4 | 📍 Case 7 ➡️ 11
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : De quel conte populaire le personnage de Gepetto est-il issu ?
+💬 R : ✅ Juste
+🎲 Dé: 6 | 📍 Case 25 ➡️ 31
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quelle série met en scène la lutte pour le Trône de Fer ?
+💬 R : Game of Thrones -> ✅ Juste
+🎲 Dé: 2 | 📍 Case 35 ➡️ 37 | ✨ 🛡️ Vous avez activé le Bouclier ! Vous êtes protégé jusqu'au prochain tour.
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 37 (BOUCLIER)
+- Bot Alpha 1 : Case 8 (SUPER_BONUS)
+- Bot Alpha 2 : Case 8 (SUPER_BONUS)
+- Bot Alpha 3 : Case 28
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Dans quelle ville a été signé le traité mettant fin à la Première Guerre mondiale ?
+💬 R : ❌ Faux (Versailles)
+🎲 Dé: 0 | 📍 Case 8 ➡️ 8
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quelle mer borde la côte sud de la France ?
+💬 R : ❌ Faux (La mer Méditerranée)
+🎲 Dé: 0 | 📍 Case 8 ➡️ 8
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Vrai ou Faux : Les Jeux Olympiques d'été ont lieu tous les quatre ans.
+💬 R : ❌ Faux (Vrai)
+🎲 Dé: 0 | 📍 Case 28 ➡️ 28
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel phénomène naturel est mesuré sur l'échelle de Richter ?
+💬 R : Les séismes -> ✅ Juste
+🎲 Dé: 5 | 📍 Case 37 ➡️ 42
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 42
+- Bot Alpha 1 : Case 8 (SUPER_BONUS)
+- Bot Alpha 2 : Case 8 (SUPER_BONUS)
+- Bot Alpha 3 : Case 28
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quelle célèbre reine d'Égypte a eu une liaison avec Jules César ?
+💬 R : ✅ Juste
+🎲 Dé: 3 | 📍 Case 8 ➡️ 11
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quelle est la nationalité du joueur de tennis Rafael Nadal ?
+💬 R : ❌ Faux (Espagnol)
+🎲 Dé: 0 | 📍 Case 8 ➡️ 8
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel est le seul métal liquide à température ambiante ?
+💬 R : ❌ Faux (Le mercure)
+🎲 Dé: 0 | 📍 Case 28 ➡️ 28
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel poète français a écrit le recueil "Les Fleurs du mal" ?
+💬 R : zola -> ❌ Faux (Charles Baudelaire)
+🎲 Dé: 0 | 📍 Case 42 ➡️ 39 | ✨ 💣 Boum ! Mauvaise réponse, recule de 3 cases.
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 39
+- Bot Alpha 1 : Case 11 (SUPER_BONUS)
+- Bot Alpha 2 : Case 8 (SUPER_BONUS)
+- Bot Alpha 3 : Case 28
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Qui était le Premier ministre britannique durant la Seconde Guerre mondiale ?
+💬 R : ✅ Juste
+🎲 Dé: 4 | 📍 Case 11 ➡️ 15 | 🎯 Cible Vous avec CIBLE_PRESSION
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel dramaturge anglais a écrit la tragédie "Roméo et Juliette" ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 8 ➡️ 10
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Vrai ou Faux : Les Jeux Olympiques d'été ont lieu tous les quatre ans.
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 28 ➡️ 30
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel dramaturge français a écrit la comédie "Le Tartuffe" ?
+💬 R : moliere -> ✅ Juste
+🎲 Dé: 2 | 📍 Case 39 ➡️ 41
+🎯 ACTION : 🔄 Échange de place avec Bot Alpha 3 !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 41
+- Bot Alpha 1 : Case 30 (BONUS_PRESSION)
+- Bot Alpha 2 : Case 10 (SUPER_BONUS)
+- Bot Alpha 3 : Case 15
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quelle célèbre reine d'Égypte a eu une liaison avec Jules César ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 30 ➡️ 31 | ✨ 💣 EXPLOSION ! Les autres joueurs reculent.
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Dans quelle ville a été signé le traité mettant fin à la Première Guerre mondiale ?
+💬 R : ❌ Faux (Versailles)
+🎲 Dé: 0 | 📍 Case 7 ➡️ 7
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel célèbre mur est tombé le 9 novembre 1989 ?
+💬 R : ❌ Faux (Le mur de Berlin)
+🎲 Dé: 0 | 📍 Case 12 ➡️ 12
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : De quoi est principalement composé le Soleil ?
+💬 R : D'hydrogène -> ✅ Juste
+🎲 Dé: 3 | 📍 Case 38 ➡️ 41 | ✨ 💣 EXPLOSION ! Vous avancez de 3 cases et les autres reculent de 3 cases !
+🎯 ACTION : 🔄 Échange de place avec Bot Alpha 2 !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 41
+- Bot Alpha 1 : Case 4 (BONUS_PRESSION)
+- Bot Alpha 2 : Case 28 (SUPER_BONUS)
+- Bot Alpha 3 : Case 9
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Dans quel musée de Paris peut-on admirer la plus grande collection de peintures impressionnistes ?
+💬 R : ✅ Juste
+🎲 Dé: 5 | 📍 Case 4 ➡️ 9 | ✨ 💣 EXPLOSION ! Les autres joueurs reculent.
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Comment appelle-t-on la force qui attire les objets vers le centre de la Terre ?
+💬 R : ❌ Faux (La gravité)
+🎲 Dé: 0 | 📍 Case 25 ➡️ 25
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel pilote britannique détient le record de victoires en Formule 1 ?
+💬 R : ✅ Juste
+🎲 Dé: 5 | 📍 Case 6 ➡️ 11
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Comment s'appelle notre galaxie ?
+💬 R : voie lactée -> ✅ Juste
+🎲 Dé: 3 | 📍 Case 38 ➡️ 41 | ✨ 💣 EXPLOSION ! Vous avancez de 3 cases et les autres reculent de 3 cases !
+🎯 ACTION : 🔄 Échange de place avec Bot Alpha 1 !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 41
+- Bot Alpha 1 : Case 22 (BONUS_PRESSION)
+- Bot Alpha 2 : Case 6 (SUPER_BONUS)
+- Bot Alpha 3 : Case 8
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel groupe de rock britannique a chanté "Bohemian Rhapsody" ?
+💬 R : ❌ Faux (Queen)
+🎲 Dé: 0 | 📍 Case 22 ➡️ 22
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quelle est la planète la plus proche du Soleil ?
+💬 R : ✅ Juste
+🎲 Dé: 4 | 📍 Case 6 ➡️ 10
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Combien de chromosomes compte l'espèce humaine en temps normal ?
+💬 R : ✅ Juste
+🎲 Dé: 4 | 📍 Case 8 ➡️ 12 | 🔄 Échange Vous avec Bot Alpha 1
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Combien de temps dure un match de rugby à XV (sans prolongations) ?
+💬 R : 100 minutes -> ✅ Juste
+🎲 Dé: 2 | 📍 Case 22 ➡️ 24
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 24
+- Bot Alpha 1 : Case 41 (BONUS_PRESSION)
+- Bot Alpha 2 : Case 10 (SUPER_BONUS)
+- Bot Alpha 3 : Case 12
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Combien de chromosomes compte l'espèce humaine en temps normal ?
+💬 R : ✅ Juste
+🎲 Dé: 3 | 📍 Case 41 ➡️ 44
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel compositeur allemand, devenu sourd, a composé la Neuvième Symphonie ?
+💬 R : ✅ Juste
+🎲 Dé: 4 | 📍 Case 10 ➡️ 14
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel groupe de rock britannique a chanté "Bohemian Rhapsody" ?
+💬 R : ✅ Juste
+🎲 Dé: 3 | 📍 Case 12 ➡️ 15 | 🎯 Cible Bot Alpha 1 avec CIBLE_PRESSION
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel écrivain a publié le roman philosophique "L'Étranger" en 1942 ?
+💬 R : Albert Camus -> ✅ Juste
+🎲 Dé: 1 | 📍 Case 24 ➡️ 25
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 25
+- Bot Alpha 1 : Case 44 (MALUS_PRESSION)
+- Bot Alpha 2 : Case 14 (SUPER_BONUS)
+- Bot Alpha 3 : Case 15 (BONUS_PRESSION)
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Vrai ou Faux : Le personnage de James Bond a été créé par Ian Fleming.
+💬 R : ❌ Faux (Vrai)
+🎲 Dé: 0 | 📍 Case 44 ➡️ 44
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel est le plus grand pays du monde par sa superficie ?
+💬 R : ❌ Faux (La Russie)
+🎲 Dé: 0 | 📍 Case 14 ➡️ 14
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Dans quel pays se trouve le mont Kilimandjaro ?
+💬 R : ✅ Juste
+🎲 Dé: 5 | 📍 Case 15 ➡️ 20 | ✨ 💡 Indice gagné !
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Comment s'appelle le fleuve qui traverse Londres ?
+💬 R : tamise -> ✅ Juste
+🎲 Dé: 2 | 📍 Case 25 ➡️ 27
+🎯 ACTION : 🎯 Cible Bot Alpha 1 avec CIBLE_PASSE_TOUR !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 27
+- Bot Alpha 1 : Case 44 (MALUS_PASSE_TOUR)
+- Bot Alpha 2 : Case 14 (SUPER_BONUS)
+- Bot Alpha 3 : Case 20 (INDICE)
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+🛑 Passe son tour à cause du Malus !
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel groupe de rock britannique a chanté "Bohemian Rhapsody" ?
+💬 R : ✅ Juste
+🎲 Dé: 5 | 📍 Case 14 ➡️ 19
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Dans quel sport s'illustre principalement le Français Antoine Dupont ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 20 ➡️ 21
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quelle est l'unité de mesure de la tension électrique ?
+💬 R : volt -> ✅ Juste
+🎲 Dé: 2 | 📍 Case 27 ➡️ 29
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 29
+- Bot Alpha 1 : Case 44
+- Bot Alpha 2 : Case 19 (SUPER_BONUS)
+- Bot Alpha 3 : Case 21
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Comment appelle-t-on la force qui attire les objets vers le centre de la Terre ?
+💬 R : ❌ Faux (La gravité)
+🎲 Dé: 0 | 📍 Case 44 ➡️ 44
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Dans quelle ville fictive se déroule la série animée Les Simpson ?
+💬 R : ✅ Juste
+🎲 Dé: 5 | 📍 Case 19 ➡️ 24
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : En quelle année a commencé la Première Guerre mondiale ?
+💬 R : Pari de 6 -> ❌ Perdu (1914)
+🎲 Dé: 6 | 📍 Case 21 ➡️ 0 | ✨ 📉 Pari perdu ! Vous reculez de 30 cases.
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel est l'os le plus long du corps humain ?
+💬 R : Le fémur -> ✅ Juste
+🎲 Dé: 2 | 📍 Case 29 ➡️ 31
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 31
+- Bot Alpha 1 : Case 44
+- Bot Alpha 2 : Case 24 (SUPER_BONUS)
+- Bot Alpha 3 : Case 0
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel compositeur allemand, devenu sourd, a composé la Neuvième Symphonie ?
+💬 R : ❌ Faux (Ludwig van Beethoven)
+🎲 Dé: 0 | 📍 Case 44 ➡️ 44
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel tournoi du Grand Chelem se joue sur terre battue à Paris ?
+💬 R : ✅ Juste
+🎲 Dé: 3 | 📍 Case 24 ➡️ 27 | 🎯 Cible Bot Alpha 3 avec CIBLE_PASSE_TOUR
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+🛑 Passe son tour à cause du Malus !
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Vrai ou Faux : Le personnage de James Bond a été créé par Ian Fleming.
+💬 R : Vrai -> ✅ Juste
+🎲 Dé: 4 | 📍 Case 31 ➡️ 35
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 35
+- Bot Alpha 1 : Case 44
+- Bot Alpha 2 : Case 27
+- Bot Alpha 3 : Case 0
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Dans l'univers d'Harry Potter, comment s'appelle l'école de magie ?
+💬 R : ✅ Juste
+🎲 Dé: 4 | 📍 Case 44 ➡️ 48
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Qui a peint le célèbre tableau "La Joconde" ?
+💬 R : ❌ Faux (Léonard de Vinci)
+🎲 Dé: 0 | 📍 Case 27 ➡️ 27
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Dans l'univers d'Harry Potter, comment s'appelle l'école de magie ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 0 ➡️ 1 | 🎯 Cible Bot Alpha 2 avec CIBLE_PRESSION
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel groupe de rock britannique a chanté "Bohemian Rhapsody" ?
+💬 R : queen -> ✅ Juste
+🎲 Dé: 2 | 📍 Case 35 ➡️ 37 | ✨ 🛡️ Vous avez activé le Bouclier ! Vous êtes protégé jusqu'au prochain tour.
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 37 (BOUCLIER)
+- Bot Alpha 1 : Case 45
+- Bot Alpha 2 : Case 24 (MALUS_PRESSION)
+- Bot Alpha 3 : Case 0 (BONUS_PRESSION)
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel acteur joue Jack Dawson dans le film Titanic ?
+💬 R : ❌ Faux (Leonardo DiCaprio)
+🎲 Dé: 0 | 📍 Case 45 ➡️ 45
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Qui était le Premier ministre britannique durant la Seconde Guerre mondiale ?
+💬 R : ❌ Faux (Winston Churchill)
+🎲 Dé: 0 | 📍 Case 24 ➡️ 24
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel gaz les plantes absorbent-elles lors de la photosynthèse ?
+💬 R : ✅ Juste
+🎲 Dé: 6 | 📍 Case 0 ➡️ 6
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Qui a découvert la pénicilline en 1928 ?
+💬 R : fleming -> ✅ Juste
+🎲 Dé: 5 | 📍 Case 37 ➡️ 42
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 42
+- Bot Alpha 1 : Case 45
+- Bot Alpha 2 : Case 24
+- Bot Alpha 3 : Case 6 (BONUS_PRESSION)
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Dans quel pays a commencé la Révolution industrielle au 18ème siècle ?
+💬 R : ❌ Faux (Royaume-Uni)
+🎲 Dé: 0 | 📍 Case 45 ➡️ 45
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Qui a ordonné la construction du Colisée à Rome ?
+💬 R : ❌ Faux (L'empereur Vespasien)
+🎲 Dé: 0 | 📍 Case 24 ➡️ 24
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Vrai ou Faux : Le personnage de James Bond a été créé par Ian Fleming.
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 6 ➡️ 7
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel écrivain a publié le roman philosophique "L'Étranger" en 1942 ?
+💬 R : Albert Camus -> ✅ Juste
+🎲 Dé: 6 | 📍 Case 42 ➡️ 48 | ✨ 💣 EXPLOSION ! Vous avancez de 6 cases et les autres reculent de 3 cases !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 48
+- Bot Alpha 1 : Case 42
+- Bot Alpha 2 : Case 21
+- Bot Alpha 3 : Case 4 (SUPER_BONUS)
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Qui est le célèbre compositeur autrichien du chef-d'œuvre "La Flûte enchantée" ?
+💬 R : ✅ Juste
+🎲 Dé: 5 | 📍 Case 42 ➡️ 47 | ✨ 💣 EXPLOSION ! Les autres joueurs reculent.
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel est le gaz le plus abondant dans l'atmosphère terrestre ?
+💬 R : ✅ Juste
+🎲 Dé: 3 | 📍 Case 18 ➡️ 21
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel coureur jamaïcain détient le record du monde du 100 mètres ?
+💬 R : ❌ Faux (Usain Bolt)
+🎲 Dé: 0 | 📍 Case 1 ➡️ 1
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel Pokémon électrique jaune est le compagnon de Sacha ?
+💬 R : pikachu -> ✅ Juste
+🎲 Dé: 2 | 📍 Case 45 ➡️ 47
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- gloire-samba : Case 47
+- Bot Alpha 1 : Case 47
+- Bot Alpha 2 : Case 21
+- Bot Alpha 3 : Case 1 (SUPER_BONUS)
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Dans quel pays se trouve la ville de Rio de Janeiro ?
+💬 R : ✅ Juste
+🎲 Dé: 5 | 📍 Case 47 ➡️ 51 | ✨ 🏆 Victoire !
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel est le prénom du célèbre plombier rouge de Nintendo ?
+💬 R : Pari de 6 -> ❌ Perdu (Mario)
+🎲 Dé: 6 | 📍 Case 21 ➡️ 0 | ✨ 📉 Pari perdu ! Vous reculez de 30 cases.
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quelle est la planète la plus proche du Soleil ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 1 ➡️ 47 | 🔄 Échange Bot Alpha 3 avec Vous

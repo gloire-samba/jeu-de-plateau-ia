@@ -1,0 +1,33 @@
+<div class="liste-container">
+  <h2>{{ isEditMode ? '✏️ Modifier l\'Utilisateur' : '➕ Ajouter un Utilisateur' }}</h2>
+
+  <div class="login-box" style="max-width: 600px; margin: auto; text-align: left;">
+    <div class="form-group">
+      <label>Pseudo</label>
+      <input type="text" [(ngModel)]="user.pseudo" placeholder="Pseudo du joueur">
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" [(ngModel)]="user.email" placeholder="Email">
+    </div>
+
+    <div class="form-group">
+      <label>Mot de passe</label>
+      <input type="password" [(ngModel)]="user.motDePasse" [placeholder]="isEditMode ? 'Laisser vide pour ne pas changer' : 'Obligatoire pour un nouveau'">
+    </div>
+
+    <div class="form-group">
+      <label>Rôle</label>
+      <select [(ngModel)]="user.role">
+        <option value="ROLE_USER">Joueur Standard</option>
+        <option value="ROLE_ADMIN">Administrateur</option>
+      </select>
+    </div>
+
+    <div class="actions-split" style="margin-top: 20px;">
+      <button class="btn-secondaire" (click)="router.navigate(['/utilisateurs'])">Annuler</button>
+      <button class="btn-principal" (click)="enregistrer()">Sauvegarder</button>
+    </div>
+  </div>
+</div>

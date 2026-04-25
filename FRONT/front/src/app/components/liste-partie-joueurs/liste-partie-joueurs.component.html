@@ -1,0 +1,40 @@
+<div class="liste-container">
+  <div class="header-actions">
+    <h2>🕹️ Joueurs en cours de partie</h2>
+    <button *ngIf="authService.isAdmin()" class="btn-add" (click)="router.navigate(['/admin/partie-joueurs/ajouter'])">+ Ajouter un Joueur</button>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID Partie</th>
+        <th>Nom du Joueur</th>
+        <th>Type</th>
+        <th>Case actuelle</th>
+        <th>Effet Actif</th>
+        <th *ngIf="authService.isAdmin()">Actions Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let j of partieJoueurs">
+        <td>Partie #{{ j.partieId || j.partie }}</td>
+        
+        <td><strong>{{ j.nomIa || j.nom_ia || (j.utilisateur ? j.utilisateur.pseudo : 'Inconnu') }}</strong></td>
+        
+        <td>
+          <span class="badge" [style.background]="j.estIa || j.est_ia ? '#e2e8f0' : '#dbeafe'">
+            {{ j.estIa || j.est_ia ? '🤖 Bot' : '👤 Humain' }}
+          </span>
+        </td>
+        
+        <td>Case {{ j.positionPlateau || j.position_plateau }}</td>
+        <td>{{ j.effetActif || j.effet_actif }}</td>
+        
+        <td *ngIf="authService.isAdmin()">
+          <button class="btn-edit" (click)="router.navigate(['/admin/partie-joueurs/modifier', j.id])">✏️</button>
+          <button class="btn-delete" (click)="supprimer(j.id)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

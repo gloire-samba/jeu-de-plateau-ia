@@ -1,0 +1,518 @@
+Historique
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Vrai ou Faux : Jeanne d'Arc a été brûlée à Rouen.
+💬 R : Vrai -> ✅ Juste
+🎲 Dé: 1 | 📍 Case 0 ➡️ 1
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel sport se pratique sur une patinoire avec un palet ?
+💬 R : Le hockey sur glace -> ✅ Juste
+🎲 Dé: 6 | 📍 Case 1 ➡️ 7 | ✨ ⚡ Sprint activé ! Vous avancez de 6 cases !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 7 (SPRINT)
+- Bot Alpha 1 : Case 0
+- Bot Alpha 2 : Case 0
+- Bot Alpha 3 : Case 0
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Laquelle de ces œuvres a été peinte par Pablo Picasso ?
+💬 R : ✅ Juste
+🎲 Dé: 6 | 📍 Case 0 ➡️ 6 | 🔄 Échange Bot Alpha 3 avec Vous
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel acteur joue Jack Dawson dans le film Titanic ?
+💬 R : ❌ Faux (Leonardo DiCaprio)
+🎲 Dé: 0 | 📍 Case 0 ➡️ 0
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel est le plus petit pays du monde ?
+💬 R : ❌ Faux (Le Vatican)
+🎲 Dé: 0 | 📍 Case 0 ➡️ 7 | ✨ ✨ Sauvé par la 2ème chance !
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : En quelle année a commencé la Première Guerre mondiale ?
+💬 R : 1914 -> ✅ Juste
+🎲 Dé: 5 | 📍 Case 0 ➡️ 10 | ✨ ⚡ Sprint activé ! Vous avancez de 10 cases !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 10
+- Bot Alpha 1 : Case 6
+- Bot Alpha 2 : Case 0
+- Bot Alpha 3 : Case 7
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Dans la série Friends, comment s'appelle le frère de Monica ?
+💬 R : ❌ Faux (Ross)
+🎲 Dé: 0 | 📍 Case 6 ➡️ 6
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Qui a été le chef de file de la Révolution russe de 1917 ?
+💬 R : ❌ Faux (Lénine)
+🎲 Dé: 0 | 📍 Case 0 ➡️ 0
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel acteur joue Jack Dawson dans le film Titanic ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 7 ➡️ 8
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel est le plus petit pays du monde ?
+💬 R : vatican -> ✅ Juste
+🎲 Dé: 1 | 📍 Case 10 ➡️ 11
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 11
+- Bot Alpha 1 : Case 6
+- Bot Alpha 2 : Case 0
+- Bot Alpha 3 : Case 8
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Qui était le premier empereur des Français ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 6 ➡️ 7
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel artiste espagnol est connu pour ses toiles surréalistes avec des horloges molles ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 0 ➡️ 2 | ✨ 💡 Indice gagné !
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Combien de films composent la trilogie originale du Seigneur des Anneaux ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 8 ➡️ 10
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel dramaturge anglais a écrit la tragédie "Roméo et Juliette" ?
+💬 R : shakespear -> ✅ Juste
+🎲 Dé: 1 | 📍 Case 11 ➡️ 12
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 12
+- Bot Alpha 1 : Case 7
+- Bot Alpha 2 : Case 2 (INDICE)
+- Bot Alpha 3 : Case 10
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel était l'ancien nom de la ville d'Istanbul avant 1868 ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 7 ➡️ 9
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel gaz les plantes absorbent-elles lors de la photosynthèse ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 2 ➡️ 4 | ✨ 💡 Indice gagné !
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : En quelle année a eu lieu la prise de la Bastille ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 10 ➡️ 12
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quelle est la nationalité du joueur de tennis Rafael Nadal ?
+💬 R : Pari de 6 -> ✅ Gagné
+🎲 Dé: 6 | 📍 Case 12 ➡️ 18 | ✨ 📈 Pari gagné ! Vous avancez de 6 cases.
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 18
+- Bot Alpha 1 : Case 9
+- Bot Alpha 2 : Case 4 (INDICE)
+- Bot Alpha 3 : Case 12
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quelle est l'unité de mesure de la tension électrique ?
+💬 R : ✅ Juste
+🎲 Dé: 5 | 📍 Case 9 ➡️ 19 | ✨ ⚡ SPRINT ! Déplacement doublé. | 🎯 Cible Bot Alpha 3 avec CIBLE_RECUL
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel sport se pratique sur une patinoire avec un palet ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 4 ➡️ 5
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Dans quelle ville a été signé le traité mettant fin à la Première Guerre mondiale ?
+💬 R : Pari de 5 -> ❌ Perdu (Versailles)
+🎲 Dé: 5 | 📍 Case 12 ➡️ 9
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel artiste a sorti l'album "Thriller", l'un des plus vendus au monde ?
+💬 R : Michael Jackson -> ✅ Juste
+🎲 Dé: 1 | 📍 Case 18 ➡️ 19
+🎯 ACTION : 🎯 Cible Bot Alpha 1 avec CIBLE_RECUL !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 19
+- Bot Alpha 1 : Case 16
+- Bot Alpha 2 : Case 5
+- Bot Alpha 3 : Case 9
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quelle molécule est universellement connue sous la formule H2O ?
+💬 R : ✅ Juste
+🎲 Dé: 4 | 📍 Case 16 ➡️ 20
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel musée parisien est célèbre pour sa grande pyramide de verre ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 5 ➡️ 6 | 🔄 Échange Bot Alpha 2 avec Vous
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Qui est le sculpteur de la célèbre statue "Le Penseur" ?
+💬 R : ✅ Juste
+🎲 Dé: 4 | 📍 Case 9 ➡️ 17 | ✨ ⚡ SPRINT ! Déplacement doublé.
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Qui a été le chef de file de la Révolution russe de 1917 ?
+💬 R : lenin -> ✅ Juste
+🎲 Dé: 4 | 📍 Case 6 ➡️ 10
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 10
+- Bot Alpha 1 : Case 20
+- Bot Alpha 2 : Case 6
+- Bot Alpha 3 : Case 17
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel explorateur a découvert l'Amérique en 1492 ?
+💬 R : ❌ Faux (Christophe Colomb)
+🎲 Dé: 0 | 📍 Case 20 ➡️ 20
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Combien de continents y a-t-il sur Terre (selon le modèle le plus courant) ?
+💬 R : ✅ Juste
+🎲 Dé: 6 | 📍 Case 6 ➡️ 12
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel sport martial japonais signifie "la voie de la souplesse" ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 17 ➡️ 19 | 🎯 Cible Vous avec CIBLE_RECUL
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quelle célèbre souris de dessin animé a été créée par Walt Disney en 1928 ?
+💬 R : mikey -> ✅ Juste
+🎲 Dé: 5 | 📍 Case 7 ➡️ 12
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 12
+- Bot Alpha 1 : Case 20
+- Bot Alpha 2 : Case 12
+- Bot Alpha 3 : Case 19
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Vrai ou Faux : L'Islande est recouverte à plus de 80 % de glace.
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 20 ➡️ 21 | 🎯 Cible Vous avec CIBLE_RECUL
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel artiste a sorti l'album "Thriller", l'un des plus vendus au monde ?
+💬 R : Pari de 2 -> ✅ Gagné
+🎲 Dé: 2 | 📍 Case 12 ➡️ 14 | ✨ 📈 Pari gagné ! Vous avancez de 2 cases.
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Vrai ou Faux : Les Jeux Olympiques d'été ont lieu tous les quatre ans.
+💬 R : ✅ Juste
+🎲 Dé: 6 | 📍 Case 19 ➡️ 25
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel est le symbole chimique de l'Or ?
+💬 R : au -> ✅ Juste
+🎲 Dé: 5 | 📍 Case 9 ➡️ 19 | ✨ ⚡ Sprint activé ! Vous avancez de 10 cases !
+🎯 ACTION : 🎯 Cible Bot Alpha 3 avec CIBLE_RECUL !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 19
+- Bot Alpha 1 : Case 21
+- Bot Alpha 2 : Case 14 (SUPER_BONUS)
+- Bot Alpha 3 : Case 22
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : En quelle année a commencé la Première Guerre mondiale ?
+💬 R : ❌ Faux (1914)
+🎲 Dé: 0 | 📍 Case 21 ➡️ 21
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Comment appelle-t-on la force qui attire les objets vers le centre de la Terre ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 14 ➡️ 15
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel pharaon est célèbre pour son masque funéraire en or massif découvert en 1922 ?
+💬 R : ❌ Faux (Toutânkhamon)
+🎲 Dé: 0 | 📍 Case 22 ➡️ 22
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel phénomène naturel est mesuré sur l'échelle de Richter ?
+💬 R : Les séismes -> ✅ Juste
+🎲 Dé: 4 | 📍 Case 19 ➡️ 23
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 23
+- Bot Alpha 1 : Case 21
+- Bot Alpha 2 : Case 15 (SUPER_BONUS)
+- Bot Alpha 3 : Case 22
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel était le surnom de l'héroïne française qui a libéré Orléans en 1429 ?
+💬 R : ❌ Faux (La Pucelle d'Orléans)
+🎲 Dé: 0 | 📍 Case 21 ➡️ 21
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel est le pays le plus peuplé du monde en 2023 ?
+💬 R : ❌ Faux (L'Inde)
+🎲 Dé: 0 | 📍 Case 15 ➡️ 15
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel est le plus haut sommet d'Europe occidentale ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 22 ➡️ 24
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel gaz les plantes absorbent-elles lors de la photosynthèse ?
+💬 R : co2 -> ✅ Juste
+🎲 Dé: 4 | 📍 Case 23 ➡️ 27
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 27
+- Bot Alpha 1 : Case 21
+- Bot Alpha 2 : Case 15 (SUPER_BONUS)
+- Bot Alpha 3 : Case 24
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quelle célèbre scientifique a découvert le radium et le polonium ?
+💬 R : ❌ Faux (Marie Curie)
+🎲 Dé: 0 | 📍 Case 21 ➡️ 21
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Vrai ou Faux : Les Jeux Olympiques d'été ont lieu tous les quatre ans.
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 15 ➡️ 16 | 🔄 Échange Bot Alpha 2 avec Bot Alpha 3
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Vrai ou Faux : Le mouvement littéraire du Romantisme valorise l'expression des sentiments.
+💬 R : ❌ Faux (Vrai)
+🎲 Dé: 0 | 📍 Case 24 ➡️ 16
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel artiste espagnol est connu pour ses toiles surréalistes avec des horloges molles ?
+💬 R : Pari de 6 -> ❌ Perdu (Salvador Dalí)
+🎲 Dé: 0 | 📍 Case 27 ➡️ 0 | ✨ 📉 Pari perdu ! Vous reculez de 36 cases.
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 0
+- Bot Alpha 1 : Case 21
+- Bot Alpha 2 : Case 16
+- Bot Alpha 3 : Case 16
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quelle mer borde la côte sud de la France ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 21 ➡️ 23
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel écrivain a publié le roman philosophique "L'Étranger" en 1942 ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 16 ➡️ 17
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Qui a peint le célèbre tableau "La Joconde" ?
+💬 R : ❌ Faux (Léonard de Vinci)
+🎲 Dé: 0 | 📍 Case 16 ➡️ 16
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel est le seul métal liquide à température ambiante ?
+💬 R : Le mercure -> ✅ Juste
+🎲 Dé: 1 | 📍 Case 0 ➡️ 1
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel sport consiste à lancer une lourde boule pour renverser dix quilles ?
+💬 R : Pari de 6 -> ✅ Gagné
+🎲 Dé: 6 | 📍 Case 1 ➡️ 7 | ✨ 🌟 EXCELLENT ! Vous avancez de 6 cases et obtenez l'effet : PARI_MULTIPLICATEUR !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 7 (PARI_MULTIPLICATEUR)
+- Bot Alpha 1 : Case 23
+- Bot Alpha 2 : Case 17
+- Bot Alpha 3 : Case 16
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel est l'os le plus long du corps humain ?
+💬 R : ❌ Faux (Le fémur)
+🎲 Dé: 0 | 📍 Case 23 ➡️ 23
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Qui a formulé la théorie de la relativité restreinte ?
+💬 R : ✅ Juste
+🎲 Dé: 5 | 📍 Case 17 ➡️ 22
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Comment s'appelait le premier président des États-Unis ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 16 ➡️ 17
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel sport martial japonais signifie "la voie de la souplesse" ?
+💬 R : judo -> ✅ Juste
+🎲 Dé: 6 | 📍 Case 7 ➡️ 37 | ✨ 📈 Pari gagné ! Vous avancez de 30 cases.
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 37
+- Bot Alpha 1 : Case 23
+- Bot Alpha 2 : Case 22
+- Bot Alpha 3 : Case 17
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel est le jeu vidéo le plus vendu de tous les temps ?
+💬 R : ❌ Faux (Minecraft)
+🎲 Dé: 0 | 📍 Case 23 ➡️ 23
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Combien d'États composent les États-Unis d'Amérique ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 22 ➡️ 24
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Dans quel océan se trouvent les îles Maldives ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 17 ➡️ 19 | 🎯 Cible Vous avec CIBLE_RECUL
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Vrai ou Faux : Le personnage de James Bond a été créé par Ian Fleming.
+💬 R : Vrai -> ✅ Juste
+🎲 Dé: 5 | 📍 Case 34 ➡️ 39
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 39
+- Bot Alpha 1 : Case 23
+- Bot Alpha 2 : Case 24
+- Bot Alpha 3 : Case 19
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel est le plus haut sommet d'Europe occidentale ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 23 ➡️ 25
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Dans quel pays se trouve le mont Kilimandjaro ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 24 ➡️ 26 | 🎯 Cible Bot Alpha 1 avec CIBLE_PRESSION
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Combien de chromosomes compte l'espèce humaine en temps normal ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 19 ➡️ 21 | 🎯 Cible Vous avec CIBLE_RECUL
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Qui est le célèbre compositeur autrichien du chef-d'œuvre "La Flûte enchantée" ?
+💬 R : mozart -> ✅ Juste
+🎲 Dé: 5 | 📍 Case 36 ➡️ 41
+🎯 ACTION : 🎯 Cible Bot Alpha 2 avec CIBLE_PRESSION !
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 41 (BONUS_PRESSION)
+- Bot Alpha 1 : Case 25 (MALUS_PRESSION)
+- Bot Alpha 2 : Case 26 (MALUS_PRESSION)
+- Bot Alpha 3 : Case 21
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Dans la mythologie grecque, qui est le dieu souverain des Enfers ?
+💬 R : ❌ Faux (Hadès)
+🎲 Dé: 0 | 📍 Case 25 ➡️ 25
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : En quelle année a eu lieu la prise de la Bastille ?
+💬 R : ❌ Faux (1789)
+🎲 Dé: 0 | 📍 Case 26 ➡️ 26
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quel célèbre mur est tombé le 9 novembre 1989 ?
+💬 R : ❌ Faux (Le mur de Berlin)
+🎲 Dé: 0 | 📍 Case 21 ➡️ 21
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quelle chanteuse est connue pour son tube "Rolling in the Deep" ?
+💬 R : Adele -> ✅ Juste
+🎲 Dé: 2 | 📍 Case 41 ➡️ 43
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Dans quel sport s'illustre principalement le Français Antoine Dupont ?
+💬 R : Le handball -> ❌ Faux (Le rugby)
+🎲 Dé: 0 | 📍 Case 43 ➡️ 43 | ✨ ⚠️ Mauvaise réponse ! Mais vous gardez quand même votre bouclier pour le prochain tour.
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 43 (BOUCLIER)
+- Bot Alpha 1 : Case 25
+- Bot Alpha 2 : Case 26
+- Bot Alpha 3 : Case 21
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Comment appelle-t-on la force qui attire les objets vers le centre de la Terre ?
+💬 R : ✅ Juste
+🎲 Dé: 6 | 📍 Case 25 ➡️ 31
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quelle est l'unité de mesure de la tension électrique ?
+💬 R : ✅ Juste
+🎲 Dé: 5 | 📍 Case 26 ➡️ 31
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Quelle est la capitale de l'Australie ?
+💬 R : ✅ Juste
+🎲 Dé: 4 | 📍 Case 21 ➡️ 25
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Combien de joueurs composent une équipe de football sur le terrain ?
+💬 R : 11 -> ✅ Juste
+🎲 Dé: 3 | 📍 Case 43 ➡️ 46 | ✨ 🛡️ Vous avez activé le Bouclier ! Vous êtes protégé jusqu'au prochain tour.
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 46 (BOUCLIER)
+- Bot Alpha 1 : Case 31
+- Bot Alpha 2 : Case 31
+- Bot Alpha 3 : Case 25
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quelles cellules du sang sont responsables du transport de l'oxygène ?
+💬 R : ✅ Juste
+🎲 Dé: 2 | 📍 Case 31 ➡️ 33
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel est le jeu vidéo le plus vendu de tous les temps ?
+💬 R : ❌ Faux (Minecraft)
+🎲 Dé: 0 | 📍 Case 31 ➡️ 31
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Dans quel pays se trouve la ville de Rio de Janeiro ?
+💬 R : ✅ Juste
+🎲 Dé: 1 | 📍 Case 25 ➡️ 26 | 🎯 Cible Bot Alpha 2 avec CIBLE_PRESSION
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Quel footballeur brésilien est surnommé "Le Roi" (O Rei) ?
+💬 R : Pelé -> ✅ Juste
+🎲 Dé: 1 | 📍 Case 46 ➡️ 47
+--------------------------------------------------
+📊 RÉSUMÉ DU PLATEAU :
+- Admin_Demo : Case 47
+- Bot Alpha 1 : Case 33
+- Bot Alpha 2 : Case 31 (MALUS_PRESSION)
+- Bot Alpha 3 : Case 26 (BONUS_PRESSION)
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 1
+❓ Q : Quel tournoi du Grand Chelem se joue sur terre battue à Paris ?
+💬 R : ✅ Juste
+🎲 Dé: 3 | 📍 Case 33 ➡️ 36 | ✨ 🛡️ Bouclier activé !
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 2
+❓ Q : Quel est le seul métal liquide à température ambiante ?
+💬 R : ❌ Faux (Le mercure)
+🎲 Dé: 0 | 📍 Case 31 ➡️ 31
+--------------------------------------------------
+🤖 TOUR DE : Bot Alpha 3
+❓ Q : Vrai ou Faux : L'Islande est recouverte à plus de 80 % de glace.
+💬 R : ❌ Faux (Faux)
+🎲 Dé: 0 | 📍 Case 26 ➡️ 26
+--------------------------------------------------
+👤 TOUR DE : VOUS
+❓ Q : Dans le Seigneur des Anneaux, comment s'appelle le magicien gris ?
+💬 R : gandalf -> ✅ Juste
+🎲 Dé: 4 | 📍 Case 47 ➡️ 51 | ✨ 🏆 Victoire !

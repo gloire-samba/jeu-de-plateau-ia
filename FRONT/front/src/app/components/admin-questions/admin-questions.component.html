@@ -1,0 +1,31 @@
+<div class="liste-container">
+  <div class="header-actions">
+    <h2>📚 Base de Questions</h2>
+    <button class="btn-add" (click)="router.navigate(['/admin/questions/ajouter'])">+ Nouvelle Question</button>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Catégorie</th>
+        <th>Texte</th>
+        <th>Bonne Réponse</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let q of questions">
+        <td>{{ q.id }}</td>
+        <td><strong>{{ q.categorie }}</strong></td>
+        <td>{{ q.texteQuestion || q.texte_question }}</td>
+        <td style="color: #10b981; font-weight: bold;">{{ q.bonneReponse || q.bonne_reponse }}</td>
+        
+        <td>
+          <button class="btn-edit" (click)="router.navigate(['/admin/questions/modifier', q.id])">✏️</button>
+          <button class="btn-delete" (click)="supprimer(q.id)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

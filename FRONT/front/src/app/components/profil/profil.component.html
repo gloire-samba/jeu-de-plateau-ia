@@ -1,0 +1,26 @@
+<div class="profil-container">
+  <div class="profil-box">
+    <h2>Mon Profil</h2>
+
+    <div *ngIf="messageSucces" class="alert success">{{ messageSucces }}</div>
+    <div *ngIf="messageErreur" class="alert error">{{ messageErreur }}</div>
+
+    <div class="form-group">
+      <label>Pseudo</label>
+      <input type="text" [(ngModel)]="pseudo" placeholder="Votre pseudo en jeu">
+    </div>
+
+    <div class="form-group">
+      <label>Email (Non modifiable)</label>
+      <input type="email" [(ngModel)]="email" disabled class="input-disabled">
+      <small>L'email vous sert d'identifiant de connexion.</small>
+    </div>
+
+    <div class="form-group">
+      <label>Nouveau mot de passe</label>
+      <input type="password" [(ngModel)]="nouveauMotDePasse" placeholder="Laissez vide pour ne pas changer">
+    </div>
+
+    <button class="btn-sauvegarder" (click)="sauvegarderProfil()">Enregistrer les modifications</button>
+  </div>
+</div>

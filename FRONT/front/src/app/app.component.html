@@ -1,0 +1,15 @@
+<div class="backend-selector">
+  <span class="selector-label">Serveur Relais :</span>
+  
+  <button 
+    [class.active]="serveurActif === 'spring'" 
+    (click)="changerServeur('spring')">☕ Spring Boot
+  </button>
+  
+  <button 
+    [class.active]="serveurActif === 'django'" 
+    (click)="changerServeur('django')">🎸 Django
+  </button>
+</div>
+
+<router-outlet></router-outlet>

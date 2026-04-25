@@ -1,0 +1,31 @@
+<div class="liste-container">
+  <button class="btn-back" (click)="retour()">⬅ Retour</button>
+  
+  <div class="header-actions">
+    <h2>📜 Historique des Parties</h2>
+    <button *ngIf="authService.isAdmin()" class="btn-add" (click)="router.navigate(['/admin/parties/ajouter'])">+ Nouvelle Partie (Manuel)</button>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Statut</th>
+        <th>Tour Actuel</th>
+        <th *ngIf="authService.isAdmin()">Actions Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of parties">
+        <td>{{ p.id }}</td>
+        <td><span class="badge">{{ p.statut }}</span></td>
+        <td>Tour {{ p.tourActuel || p.tour_actuel }}</td>
+        
+        <td *ngIf="authService.isAdmin()">
+          <button class="btn-edit" (click)="router.navigate(['/admin/parties/modifier', p.id])">✏️ Modifier</button>
+          <button class="btn-delete" (click)="supprimer(p.id)">🗑️ Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

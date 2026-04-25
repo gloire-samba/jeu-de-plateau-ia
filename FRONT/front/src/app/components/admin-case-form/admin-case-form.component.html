@@ -1,0 +1,29 @@
+<div class="liste-container">
+  <h2>{{ isEditMode ? '✏️ Modifier la Case' : '➕ Ajouter une Case' }}</h2>
+  <div class="login-box" style="max-width: 600px; margin: auto; text-align: left;">
+    <div class="form-group" *ngIf="!isEditMode">
+      <label>ID de la Partie (Numéro)</label>
+      <input type="number" [(ngModel)]="c.partieId">
+    </div>
+    <div class="form-group">
+      <label>Position sur le plateau</label>
+      <input type="number" [(ngModel)]="c.positionPlateau">
+    </div>
+    <div class="form-group">
+      <label>Effet</label>
+      <input type="text" [(ngModel)]="c.effet" placeholder="Ex: AUCUN, SPRINT...">
+    </div>
+    <div class="form-group">
+      <label>Catégorie (Optionnel)</label>
+      <input type="text" [(ngModel)]="c.categorie">
+    </div>
+    <div class="form-group">
+      <label>Points</label>
+      <input type="number" [(ngModel)]="c.points">
+    </div>
+    <div class="actions-split mt-20">
+      <button class="btn-secondaire" (click)="router.navigate(['/cases'])">Annuler</button>
+      <button class="btn-principal" (click)="enregistrer()">Sauvegarder</button>
+    </div>
+  </div>
+</div>

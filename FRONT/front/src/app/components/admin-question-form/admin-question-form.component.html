@@ -1,0 +1,27 @@
+<div class="liste-container">
+  <h2>{{ isEditMode ? '✏️ Modifier la Question' : '➕ Ajouter une Question' }}</h2>
+
+  <div class="login-box" style="max-width: 600px; margin: auto; text-align: left;">
+    <div class="form-group">
+      <label>Catégorie</label>
+      <select [(ngModel)]="question.categorie">
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Question</label>
+      <textarea [(ngModel)]="question.texteQuestion" placeholder="Texte de la question" style="width: 100%; height: 100px; border-radius: 6px; padding: 10px; border: 1px solid #cbd5e1;"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Bonne Réponse</label>
+      <input type="text" [(ngModel)]="question.bonneReponse" placeholder="La réponse exacte">
+    </div>
+
+    <div class="actions-split" style="margin-top: 20px;">
+      <button class="btn-secondaire" (click)="router.navigate(['/admin/questions'])">Annuler</button>
+      <button class="btn-principal" (click)="enregistrer()">Sauvegarder</button>
+    </div>
+  </div>
+</div>

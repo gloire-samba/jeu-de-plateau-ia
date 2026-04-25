@@ -1,0 +1,89 @@
+<div class="lobby-header" style="display: flex; flex-direction: column; gap: 1rem; padding: 1rem; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2 style="margin: 0;">Salon de Jeu</h2>
+    <div>
+      <button (click)="router.navigate(['/profil'])" style="margin-right: 1rem; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; border: 1px solid #cbd5e1;">Mon Profil</button>
+      <button (click)="authService.logout()" style="background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">Déconnexion</button>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 1rem; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+    <button (click)="router.navigate(['/parties'])" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer;">🏁 Voir les Parties</button>
+    <button (click)="router.navigate(['/utilisateurs'])" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer;">👥 Liste des Joueurs</button>
+    <button (click)="router.navigate(['/cases'])" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer;">🗺️ Infos Plateaux</button>
+    <button (click)="router.navigate(['/partie-joueurs'])" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer;">🕹️ Joueurs en partie</button>
+    
+    <button *ngIf="authService.isAdmin()" (click)="router.navigate(['/admin'])" style="background: #8b5cf6; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; margin-left: auto;">👑 Retour Admin</button>
+  </div>
+
+</div>
+
+<div class="lobby-container">
+  <div class="lobby-card">
+    
+    <div *ngIf="messageErreur" class="erreur-box">{{ messageErreur }}</div>
+
+    <div *ngIf="etape === 1">
+      <h2>🚀 Paramétrage de la Partie</h2>
+      
+      <div class="form-group">
+        <label>Nombre de Bots (1-3) :</label>
+        <input type="number" min="1" max="3" [(ngModel)]="nbBots">
+      </div>
+
+      <div class="form-group">
+        <label>Type de Plateau :</label>
+        <select [(ngModel)]="typePlateau">
+          <option [ngValue]="0">Classique (Défaut)</option>
+          <option [ngValue]="1">Aléatoire (Mode Chaos)</option>
+          <option [ngValue]="2">Personnalisé (Construire le plateau)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Taille du Plateau (Cases max) :</label>
+        <input type="number" min="20" max="100" [(ngModel)]="taillePlateau">
+      </div>
+
+      <button class="btn-principal action-demarrer" (click)="validerConfig()">
+        {{ typePlateau === 2 ? 'Construire le Plateau' : 'Démarrer le Jeu !' }}
+      </button>
+    </div>
+
+    <div *ngIf="etape === 2" class="builder-container">
+      <h2>🛠️ Éditeur de Plateau</h2>
+      <p>Arrivée prévue à la case {{ taillePlateau + 1 }}</p>
+
+      <div class="builder-tools">
+        <label>1. Choisir un effet :</label>
+        <select [(ngModel)]="effetSelectionne">
+          <option *ngFor="let effet of effetsDispos" [value]="effet">{{ effet }}</option>
+        </select>
+      </div>
+
+      <p class="instruction">2. Cliquez sur une case libre pour placer l'effet, ou sur une case occupée pour l'effacer.</p>
+
+      <div class="grille-cases">
+        <button *ngFor="let num of casesDisponibles" 
+                class="case-btn libre" 
+                (click)="placerEffet(num)">
+          Case {{ num }}
+        </button>
+
+        <button *ngFor="let item of plateauCustom | keyvalue" 
+                class="case-btn occupee" 
+                (click)="effacerCase(+$any(item.key))">
+          <span class="num">Case {{ item.key }}</span>
+          <span class="eff">{{ $any(item.value).effet }}</span>
+        </button>
+      </div>
+
+      <div class="actions-split mt-20">
+        <button class="btn-secondaire" (click)="etape = 1">⬅️ Retour</button>
+        <button class="btn-principal" (click)="lancerPartie()">✅ Lancer la Partie !</button>
+      </div>
+    </div>
+
+  </div>
+</div>

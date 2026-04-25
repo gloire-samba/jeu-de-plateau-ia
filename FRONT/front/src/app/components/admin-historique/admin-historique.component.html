@@ -1,0 +1,30 @@
+<div class="liste-container">
+  <div class="header-actions">
+    <h2>📜 Historique des Questions Posées</h2>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Catégorie</th>
+        <th>ID Question</th>
+        <th>ID Utilisateur (Humain)</th>
+        <th>ID PartieJoueur (Bot)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of historiques">
+        <td>{{ h.id }}</td>
+        <td><strong>{{ h.categorie }}</strong></td>
+        <td>#{{ h.questionId || h.question }}</td>
+        <td>{{ h.utilisateurId || h.utilisateur || 'N/A' }}</td>
+        <td>{{ h.partieJoueurId || h.partie_joueur || 'N/A' }}</td>
+        <td>
+          <button class="btn-delete" (click)="supprimer(h.id)">🗑️ Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

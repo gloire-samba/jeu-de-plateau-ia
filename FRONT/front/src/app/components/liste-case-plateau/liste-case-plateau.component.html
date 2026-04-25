@@ -1,0 +1,32 @@
+<div class="liste-container">
+  <div class="header-actions">
+    <h2>🗺️ Configuration des Cases</h2>
+    <button *ngIf="authService.isAdmin()" class="btn-add" (click)="router.navigate(['/admin/cases/ajouter'])">+ Créer une Case</button>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Partie ID</th>
+        <th>Position</th>
+        <th>Effet</th>
+        <th>Catégorie</th>
+        <th>Points</th>
+        <th *ngIf="authService.isAdmin()">Actions Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of cases">
+        <td>Partie #{{ c.partieId || c.partie }}</td>
+        <td>Case <strong>{{ c.positionPlateau || c.position_plateau }}</strong></td>
+        <td><span class="badge">{{ c.effet }}</span></td>
+        <td>{{ c.categorie || 'Toutes' }}</td>
+        <td>{{ c.points }} pts</td>
+        <td *ngIf="authService.isAdmin()">
+              <button class="btn-edit" (click)="router.navigate(['/admin/cases/modifier', c.id])">✏️</button>
+              <button class="btn-delete" (click)="supprimer(c.id)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

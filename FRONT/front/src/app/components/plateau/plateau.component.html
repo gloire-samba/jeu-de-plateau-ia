@@ -1,0 +1,240 @@
+<div class="alert-container">
+  <div *ngFor="let alerte of alertes" class="alerte-toast" [ngClass]="'alerte-' + alerte.type">
+    {{ alerte.message }}
+  </div>
+</div>
+
+<div class="plateau-layout">
+  
+  <div class="zone-plateau">
+    <div class="header-plateau">
+      <h2>Partie #{{ partieId }}</h2>
+      <div class="de-box" *ngIf="valeurDe !== null" [ngClass]="{'de-rolling': deEnRotation}">
+        🎲 Résultat : <strong>{{ valeurDe }}</strong>
+      </div>
+    </div>
+
+    <div class="grille">
+      <div 
+        class="case" 
+        *ngFor="let pos of casesGrille"
+        [ngClass]="effetsMap[pos] ? effetsMap[pos].effet : 'AUCUN'"
+        [title]="'Case ' + pos + (effetsMap[pos] && effetsMap[pos].effet !== 'AUCUN' ? ' - Effet : ' + effetsMap[pos].effet : '')"
+      >
+        <span class="num-case">{{ pos === 0 ? 'Départ' : (pos === taillePlateau ? 'Fin' : pos) }}</span>
+        
+        <span class="nom-effet" *ngIf="effetsMap[pos] && effetsMap[pos].effet !== 'AUCUN'">
+          {{ effetsMap[pos].effet }}
+        </span>
+        <span class="cat-case" *ngIf="effetsMap[pos] && effetsMap[pos].categorie">
+          {{ effetsMap[pos].categorie }}
+        </span>
+
+        <div class="zone-pions">
+          <div 
+            *ngFor="let joueur of getJoueursSurCase(pos)" 
+            class="pion"
+            [ngClass]="{
+              'pion-moi': joueur.id === monId, 
+              'pion-ia': joueur.estIa,
+              'pion-immunise': joueur.statut === 'BOUCLIER',
+              'pion-malus': joueur.statut.startsWith('MALUS')
+            }"
+            [title]="joueur.nom + ' (Statut: ' + joueur.statut + (joueur.dureeEffet > 0 ? ' - ' + joueur.dureeEffet + ' tour(s) restant(s)' : '') + ')'"
+          >
+            {{ joueur.nom.charAt(0) }}
+            <span *ngIf="joueur.statut && joueur.statut !== 'NORMAL'" class="badge-statut">
+              {{ joueur.dureeEffet > 0 ? joueur.dureeEffet : '!' }}
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="zone-action">
+
+    <div *ngIf="partieTerminee" class="carte-joueur box-fin-partie">
+      <h2 style="margin-top: 0; text-align: center; color: #1e293b;">🏁 LA PARTIE EST TERMINÉE !</h2>
+      <p style="text-align: center; font-size: 18px;">
+        Vainqueur : 
+        <strong [ngStyle]="{'color': vainqueur === 'Vous' ? '#d97706' : '#7e22ce'}">
+          {{ vainqueur }}
+        </strong>
+      </p>
+      <button class="btn-principal mt-20" (click)="retourMenu()" style="background-color: #0f172a;">
+        Retourner au Menu Principal
+      </button>
+    </div>
+
+    <ng-container *ngIf="!partieTerminee">
+      <div class="carte-joueur">
+        <h3>🎮 C'est à vous de jouer !</h3>
+        <p>Votre position : Case <strong>{{ maPosition }}</strong></p>
+        
+        <ng-container *ngIf="monAncienStatut === 'MALUS_PASSE_TOUR'">
+          <div class="box-interaction" style="background: #1e293b; color: white; padding: 15px; border-radius: 8px;">
+            <h3 style="color: #f8fafc; margin-top: 0;">🛑 TOUR PASSÉ !</h3>
+            <p>Vous subissez un malus. Vous devez laisser jouer les adversaires ce tour-ci.</p>
+            <button class="btn-principal mt-10" style="background: #f59e0b;" (click)="passerTourMalus()" [disabled]="enAttenteServeur">
+              {{ enAttenteServeur ? 'Chargement...' : 'Laisser jouer les bots' }}
+            </button>
+          </div>
+        </ng-container>
+
+        <button class="btn-principal mt-20" 
+                *ngIf="monAncienStatut !== 'MALUS_PASSE_TOUR' && !questionEnCours && !effetEnAttente" 
+                (click)="tirerQuestion()" 
+                [disabled]="enAttenteServeur || maPosition >= taillePlateau || deEnRotation">
+          {{ enAttenteServeur ? 'Chargement...' : 
+             (aDroitDeuxiemeChance ? 'Retirer une question (2ème chance ✨)' : 'Tirer une Question') }}
+        </button>
+      </div>
+
+      <div *ngIf="effetEnAttente && effetEnAttente !== 'SUPER_BONUS' && effetEnAttente !== 'CIBLE_ECHANGE'" class="box-interaction" style="background: #fffbeb; border: 2px solid #f59e0b; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+        <h3 style="color: #d97706; margin-top: 0;">⚠️ Action Requise !</h3>
+        <p>Vous avez activé : <strong>{{ effetEnAttente }}</strong>.</p>
+        <p>Choisissez un adversaire pour subir cet effet :</p>
+        
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+          <select #cibleSelect style="flex: 1; padding: 8px; border-radius: 4px; border: 1px solid #d1d5db;" [disabled]="enAttenteServeur">
+            <option *ngFor="let adv of adversaires" [value]="adv.id">
+              {{ adv.nom }} (Case {{ adv.position }}) - {{ adv.statut === 'BOUCLIER' ? '🛡️ Protégé' : 'Vulnérable' }}
+            </option>
+          </select>
+          <button (click)="validerEffet(+cibleSelect.value)" 
+                  [disabled]="enAttenteServeur"
+                  style="background: #f59e0b; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 4px; font-weight: bold;">
+            Appliquer
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="effetEnAttente === 'CIBLE_ECHANGE'" class="box-interaction" style="background: #fffbeb; border: 2px solid #f59e0b; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+        <h3 style="color: #d97706; margin-top: 0;">⚠️ Échange de Places !</h3>
+        <p>Vous avez activé : <strong>{{ effetEnAttente }}</strong>.</p>
+        <p>Choisissez deux joueurs pour échanger leurs positions :</p>
+        
+        <div style="display: flex; gap: 10px; margin-top: 10px; align-items: center;">
+          <select #cible1Select style="flex: 1; padding: 8px; border-radius: 4px; border: 1px solid #d1d5db;" [disabled]="enAttenteServeur">
+            <option *ngFor="let j of joueursEchangeables" [value]="j.id">
+              {{ j.nom }} (Case {{ j.position }})
+            </option>
+          </select>
+          
+          <span style="font-size: 20px;">🔄</span>
+
+          <select #cible2Select style="flex: 1; padding: 8px; border-radius: 4px; border: 1px solid #d1d5db;" [disabled]="enAttenteServeur">
+            <option *ngFor="let j of joueursEchangeables" [value]="j.id">
+              {{ j.nom }} (Case {{ j.position }})
+            </option>
+          </select>
+
+          <button (click)="validerEffet(+cible1Select.value, +cible2Select.value)" 
+                  [disabled]="enAttenteServeur"
+                  style="background: #f59e0b; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 4px; font-weight: bold;">
+            Échanger
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="effetEnAttente === 'SUPER_BONUS'" class="box-interaction" style="background: #fef08a; border: 2px solid #ca8a04; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+        <h3 style="color: #a16207; margin-top: 0;">🌟 SUPER BONUS !</h3>
+        <p>Vous gagnez un <strong>Bouclier</strong> 🛡️ pour le prochain tour !</p>
+        <p>Paramétrez votre question supplémentaire :</p>
+        
+        <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+          <select [(ngModel)]="sbCategorie" style="padding: 8px; border-radius: 4px;">
+            <option value="HISTOIRE">Histoire</option>
+            <option value="GEOGRAPHIE">Géographie</option>
+            <option value="SCIENCES">Sciences</option>
+            <option value="SPORT">Sport</option>
+            <option value="DIVERTISSEMENT">Divertissement</option>
+            <option value="ARTS_ET_LITTERATURE">Arts & Littérature</option>
+          </select>
+          
+          <select [(ngModel)]="sbPoints" style="padding: 8px; border-radius: 4px;">
+            <option [value]="1">1 Point</option>
+            <option [value]="2">2 Points</option>
+            <option [value]="3">3 Points</option>
+            <option [value]="4">4 Points</option>
+            <option [value]="5">5 Points</option>
+            <option [value]="6">6 Points</option>
+          </select>
+
+          <select [(ngModel)]="sbEffet" style="padding: 8px; border-radius: 4px;">
+            <option *ngFor="let effet of effetsSuperBonusDispos" [value]="effet">{{ effet }}</option>
+          </select>
+
+          <button (click)="lancerQuestionSuperBonus()" style="background: #ca8a04; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 4px; font-weight: bold;">
+            Jouer la Question !
+          </button>
+        </div>
+      </div>
+
+      <div class="carte-question" *ngIf="questionEnCours">
+        <div class="chrono-container">
+          <div class="chrono-cercle" 
+               [ngClass]="{'danger': tempsRestant <= 10, 'warning': tempsRestant <= 30 && tempsRestant > 10}">
+            ⏱️ {{ tempsRestant }}s
+          </div>
+        </div>
+
+        <div *ngIf="(effetsMap[maPosition]?.effet === 'PARI_MULTIPLICATEUR' || monAncienStatut === 'PARI_MULTIPLICATEUR') && !modeSuperBonus" class="box-pari slide-in">
+          <h4 style="margin-top: 0; color: #be185d;">🎰 PARI MULTIPLICATEUR !</h4>
+          <p style="font-size: 14px; margin-bottom: 10px;">
+            Choisissez votre multiplicateur de risque (1 à 6).<br>
+            Si vous répondez juste, vous avancerez de <strong>ce chiffre × les points de la case</strong>.<br>
+            Si vous vous trompez, vous reculerez d'autant !
+          </p>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label style="font-weight: bold; color: #9d174d;">Multiplicateur :</label>
+            <select [(ngModel)]="pariChoisi" style="padding: 8px; border-radius: 4px; border: 2px solid #f9a8d4; outline: none; font-weight: bold; background: white;">
+              <option [value]="1">1</option>
+              <option [value]="2">2</option>
+              <option [value]="3">3</option>
+              <option [value]="4">4</option>
+              <option [value]="5">5</option>
+              <option [value]="6">6</option>
+            </select>
+          </div>
+        </div>
+
+        <span class="badge-type">{{ questionEnCours.typeQuestion }}</span>
+        <p class="texte-question">{{ questionEnCours.texteQuestion }}</p>
+
+        <div class="box-indice" *ngIf="questionEnCours.indiceTexte">
+          <p>💡 INDICE :</p>
+          <span class="code-indice">{{ questionEnCours.indiceTexte }}</span>
+        </div>
+
+        <div class="qcm-grid" *ngIf="questionEnCours.propositions && questionEnCours.propositions.length > 0">
+          <button *ngFor="let prop of questionEnCours.propositions" 
+                  class="btn-qcm" 
+                  (click)="repondreQcm(prop)"
+                  [disabled]="enAttenteServeur">
+            {{ prop }}
+          </button>
+        </div>
+
+        <div class="texte-libre" *ngIf="!questionEnCours.propositions || questionEnCours.propositions.length === 0">
+          <input type="text" 
+                 [(ngModel)]="reponseSaisie" 
+                 placeholder="Tapez votre réponse ici..." 
+                 (keyup.enter)="envoyerReponse()"
+                 [disabled]="enAttenteServeur">
+          <button class="btn-principal mt-10" (click)="envoyerReponse()" [disabled]="enAttenteServeur || !reponseSaisie.trim()">Valider</button>
+        </div>
+
+        <button class="btn-secondaire mt-10" (click)="passerTour()" [disabled]="enAttenteServeur">Passer la question</button>
+      </div>
+    </ng-container>
+
+    <div class="console-logs">
+      <h4>Historique</h4>
+      <div class="log-item" *ngFor="let log of logs.slice().reverse()">{{ log }}</div>
+    </div>
+
+  </div>
+</div>
