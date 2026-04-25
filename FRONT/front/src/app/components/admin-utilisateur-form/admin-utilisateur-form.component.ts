@@ -13,9 +13,11 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AdminUtilisateurFormComponent implements OnInit {
   private http = inject(HttpClient);
-  private route = inject(ActivatedRoute);
+  public route = inject(ActivatedRoute);
   public router = inject(Router);
-  private authService = inject(AuthService);
+  public authService = inject(AuthService);
+
+  hidePassword: boolean = true;
 
   isEditMode = false;
   userId: string | null = null;
@@ -46,5 +48,9 @@ export class AdminUtilisateurFormComponent implements OnInit {
 
     const request = this.isEditMode ? this.http.put(url, payload) : this.http.post(url, payload);
     request.subscribe(() => this.router.navigate(['/utilisateurs']));
+  }
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 }

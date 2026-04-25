@@ -1,0 +1,7 @@
+.password-container { position: relative; display: flex; align-items: center; width: 100%; }
+.password-container input { padding-right: 40px; }
+.btn-eye {
+  position: absolute; right: 10px; background: none; border: none; font-size: 1.2rem;
+  cursor: pointer; padding: 5px; transition: transform 0.2s ease; display: flex; align-items: center;
+}
+.btn-eye:hover { transform: scale(1.1); }

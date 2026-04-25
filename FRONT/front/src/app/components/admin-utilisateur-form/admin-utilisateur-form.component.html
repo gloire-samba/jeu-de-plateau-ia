@@ -14,7 +14,16 @@
 
     <div class="form-group">
       <label>Mot de passe</label>
-      <input type="password" [(ngModel)]="user.motDePasse" [placeholder]="isEditMode ? 'Laisser vide pour ne pas changer' : 'Obligatoire pour un nouveau'">
+      <div class="password-container">
+        <input 
+          [type]="hidePassword ? 'password' : 'text'" 
+          [(ngModel)]="user.motDePasse" 
+          [placeholder]="isEditMode ? 'Laisser vide pour ne pas changer' : 'Obligatoire pour un nouveau'"
+        >
+        <button type="button" class="btn-eye" (click)="togglePasswordVisibility()" [attr.title]="hidePassword ? 'Afficher' : 'Masquer'">
+          {{ hidePassword ? '👁️' : '🙈' }}
+        </button>
+      </div>
     </div>
 
     <div class="form-group">

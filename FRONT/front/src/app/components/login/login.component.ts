@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   public serveurService = inject(ServeurService); // 👉 INJECTION POUR LE HTML
   public router = inject(Router);
   public route = inject(ActivatedRoute); 
+    // À l'intérieur de ta classe LoginComponent, ajoute :
+  hidePassword: boolean = true;
 
   isLoginMode = true; 
   
@@ -103,6 +105,10 @@ export class LoginComponent implements OnInit {
     } else {
       window.location.href = `http://localhost:8080/oauth2/authorization/${fournisseur}`;
     }
+  }
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 
   

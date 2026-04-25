@@ -27,6 +27,8 @@ export class ProfilComponent implements OnInit {
   messageSucces: string = '';
   messageErreur: string = '';
 
+  hidePassword: boolean = true;
+
   ngOnInit() {
     this.chargerMonProfil();
   }
@@ -75,5 +77,9 @@ export class ProfilComponent implements OnInit {
         this.messageErreur = "Erreur lors de la sauvegarde (Ce pseudo ou email est peut-être déjà pris).";
       }
     });
+  }
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 }

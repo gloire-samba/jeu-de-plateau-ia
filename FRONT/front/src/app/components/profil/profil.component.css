@@ -8,6 +8,12 @@ input { width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius:
 small { display: block; margin-top: 0.25rem; color: #64748b; font-size: 0.8rem; }
 .btn-sauvegarder { width: 100%; background: #10b981; color: white; border: none; padding: 0.75rem; border-radius: 6px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
 .btn-sauvegarder:hover { background: #059669; }
-.alert { padding: 0.75rem; border-radius: 6px; margin-bottom: 1.5rem; font-weight: bold; }
-.alert.success { background: #d1fae5; color: #047857; }
-.alert.error { background: #fee2e2; color: #b91c1c; }
+.alert { padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; font-weight: bold; }
+.success { background-color: #d1fae5; color: #065f46; border: 1px solid #10b981; }
+.error { background-color: #fee2e2; color: #b91c1c; border: 1px solid #ef4444; }
+
+/* 👉 LES RÈGLES DE L'ŒIL ICI AUSSI */
+.password-container { position: relative; display: flex; align-items: center; width: 100%; }
+.password-container input { padding-right: 40px; }
+.btn-eye { position: absolute; right: 10px; background: none; border: none; font-size: 1.2rem; cursor: pointer; padding: 5px; transition: transform 0.2s ease; display: flex; align-items: center; }
+.btn-eye:hover { transform: scale(1.1); }
