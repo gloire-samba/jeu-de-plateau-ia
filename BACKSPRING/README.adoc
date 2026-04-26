@@ -5,7 +5,7 @@
 
 toc::[]
 
-link:../../README.adoc[⬅️ Retour à la racine du projet]
+link:../README.adoc[⬅️ Retour à la racine du projet]
 
 == 📖 Présentation du module
 Ce module constitue le cœur décisionnel du projet. Développé avec **Spring Boot 4.0.5** et **Java 25**, il centralise les règles métier, la gestion du plateau et l'arbitrage des réponses. Il assure une communication fluide avec le serveur Python pour l'intelligence des bots tout en garantissant la sécurité des données via JWT.

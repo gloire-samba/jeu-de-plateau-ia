@@ -5,7 +5,7 @@
 
 toc::[]
 
-link:../../README.adoc[⬅️ Retour à la racine du projet]
+link:../README.adoc[⬅️ Retour à la racine du projet]
 
 == 📖 Présentation du module
 Ce module constitue le second pilier back-end du projet. Développé avec **Python 3.12** et **Django**, il offre une alternative performante au serveur Java. Sa mission principale est de servir de cerveau pour les adversaires automatisés (Bots) et d'assurer la gestion de la banque de questions via un système d'importation SQL optimisé.

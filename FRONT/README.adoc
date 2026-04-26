@@ -5,7 +5,7 @@
 
 toc::[]
 
-link:../../README.adoc[⬅️ Retour à la racine du projet]
+link:../README.adoc[⬅️ Retour à la racine du projet]
 
 == 📖 Présentation du module
 Ce module constitue l'interface graphique (UI) de notre projet. Développé avec **Angular**, il offre une expérience utilisateur fluide et interactive. Sa particularité majeure réside dans sa capacité **hybride** : une simple barre de navigation permet de basculer instantanément entre le moteur Java (Spring Boot) et le moteur Python (Django).
