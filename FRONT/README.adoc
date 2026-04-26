@@ -1,0 +1,91 @@
+= 🎨 Interface Utilisateur (Front-End Angular)
+:toc: macro
+:toc-title: Sommaire
+:sectnums:
+
+toc::[]
+
+link:../../README.adoc[⬅️ Retour à la racine du projet]
+
+== 📖 Présentation du module
+Ce module constitue l'interface graphique (UI) de notre projet. Développé avec **Angular**, il offre une expérience utilisateur fluide et interactive. Sa particularité majeure réside dans sa capacité **hybride** : une simple barre de navigation permet de basculer instantanément entre le moteur Java (Spring Boot) et le moteur Python (Django).
+
+**Fonctionnalités clés :**
+* **Gestion Multi-Serveur :** Commutation dynamique des APIs REST en un clic.
+* **Moteur de Plateau Interactif :** Affichage de la grille, animations des dés et notifications "toast" en temps réel.
+* **Authentification Sociale :** Support complet de Google et GitHub OAuth2.
+* **Dashboard Admin Puissant :** Gestion totale des utilisateurs, des questions et des états de parties en cours.
+
+== 🏗️ Architecture et Fichiers Clés
+
+=== ⚙️ Configuration & Infrastructure
+* `angular.json` : Configuration du build Angular et des environnements.
+* `Dockerfile` : Build multi-stage (Node 24 pour compiler, Nginx Alpine pour servir les fichiers statiques sur le port 80).
+* `nginx.conf` : Configure le serveur web pour gérer le routage des Single Page Applications (SPA).
+* `environment.development.ts` : Contient les points d'entrée des deux serveurs : `http://localhost:8080` (Spring) et `http://localhost:8000` (Django).
+
+=== 🛠️ Services & Communication (Le Cœur)
+* `serveur.service.ts` : Le chef de gare. Il mémorise quel serveur (Spring ou Django) est actif dans le `localStorage`.
+* `jeu.service.ts` : Gère toutes les actions de jeu (lancer les dés, répondre aux questions, appliquer des effets). Il adapte automatiquement les URLs (ajoute ou non un slash final) selon le backend choisi.
+* `auth.service.ts` : Gère la session utilisateur, les jetons JWT et la redirection après connexion sociale.
+* `model-dto.ts` : Définit les interfaces TypeScript (`CasePlateau`, `ReponseTourDto`, `QuestionDto`) pour assurer la cohérence des données reçues des deux backends.
+
+=== 🛡️ Sécurité & Guards
+* `jwt.interceptor.ts` : Intercepte chaque requête HTTP sortante pour y greffer automatiquement le Token JWT dans le header "Authorization".
+* `auth.guard.ts` : Protège les routes. Le `adminGuard` vérifie le rôle `ROLE_ADMIN` avant de laisser entrer dans le dashboard.
+
+=== 🎮 Composants de Jeu
+* `app.component` : Contient la barre de sélection visuelle "☕ Spring / 🎸 Django".
+* `plateau.component` : La pièce maîtresse. Il gère l'affichage dynamique de la grille, le minuteur des questions, et le traitement des logs de combat des bots.
+* `lobby.component` : Le salon d'attente. Permet de choisir le nombre de bots et de construire son propre plateau de jeu case par case.
+* `login.component` : Gère l'accès sécurisé et les boutons OAuth2.
+* `profil.component` : Permet au joueur de modifier son pseudo ou son mot de passe.
+
+=== 👑 Espace Administration (CRUD Complet)
+* `admin-dashboard` : Le menu principal réservé aux administrateurs.
+* `admin-questions` & `admin-question-form` : Interface pour piloter la banque de 120 questions.
+* `liste-utilisateurs` : Vue d'ensemble pour bannir ou promouvoir des membres.
+* `liste-parties` : Permet de suivre toutes les sessions et d'accéder à l'historique textuel détaillé de chaque partie.
+* `admin-case-form` : Permet de modifier manuellement la position ou les bonus d'un joueur "à chaud".
+
+== 🚀 Comment lancer l'interface ?
+
+⚠️ **Attention :** Pour que l'interface fonctionne, vous devez impérativement avoir lancé l'un des deux serveurs (Spring ou Django) au préalable.
+
+=== 🖥️ Méthode A : Lancement Manuel (Développement)
+_Idéal pour voir vos modifications de code en temps réel._
+_Prérequis : Node.js (v24+)._
+
+⚠️ **Note importante :** Si vous lancez le front-end manuellement sans Docker, il faut impérativement démarrer au moins l'un des deux back-ends (Spring ou Django) en mode normal pour pouvoir utiliser l'application convenablement.
+
+1. Ouvrez un terminal dans le dossier `FRONT/front/`.
+2. Installez les dépendances (le flag legacy est nécessaire pour certaines versions de librairies) :
+[source,bash]
+----
+npm install --legacy-peer-deps
+----
+3. Démarrez le serveur de développement :
+[source,bash]
+----
+ng serve
+----
+4. Ouvrez votre navigateur sur : **http://localhost:4200**
+
+=== 🐋 Méthode B : Docker (Nginx)
+_Méthode pour simuler un environnement de production stable._
+
+1. Placez-vous à la **racine du projet** (où se trouve le `docker-compose.yml`).
+2. Exécutez la commande :
+[source,bash]
+----
+sudo docker-compose up --build -d front
+----
+_L'interface sera alors accessible sur le port **4200** (Docker redirige le port 80 interne vers le 4200 externe)._
+
+== 🛑 Comment arrêter l'interface ?
+* **Si lancée manuellement :** Faites un `Ctrl + C` dans votre terminal.
+* **Si lancée avec Docker :** Tapez la commande suivante :
+[source,bash]
+----
+sudo docker-compose stop front
+----

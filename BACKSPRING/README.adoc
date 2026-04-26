@@ -1,0 +1,109 @@
+= ☕ Serveur Back-End Java (Spring Boot)
+:toc: macro
+:toc-title: Sommaire
+:sectnums:
+
+toc::[]
+
+link:../../README.adoc[⬅️ Retour à la racine du projet]
+
+== 📖 Présentation du module
+Ce module constitue le cœur décisionnel du projet. Développé avec **Spring Boot 4.0.5** et **Java 25**, il centralise les règles métier, la gestion du plateau et l'arbitrage des réponses. Il assure une communication fluide avec le serveur Python pour l'intelligence des bots tout en garantissant la sécurité des données via JWT.
+
+**Fonctions principales :**
+* **Moteur de règles :** Gestion des dés, des déplacements et des effets de cases interactives.
+* **Jugement Intelligent :** Validation des réponses avec tolérance orthographique (Levenshtein).
+* **Sécurité Robuste :** Authentification JWT et intégration OAuth2 (Google/GitHub).
+* **Persistance :** Utilisation d'une base de données H2 persistante (fichier `./jeu_plateau_db`).
+
+== 🏗️ Architecture et Fichiers Clés
+Le projet respecte une architecture n-tiers strictement découpée pour faciliter la maintenance.
+
+=== ⚙️ Configuration & Infrastructure
+* `pom.xml` : Contient toutes les dépendances Maven (Starter Web, Data JPA, Security, OAuth2 Client, JWT, H2, DataFaker).
+* `Dockerfile` : Script de build multi-stage optimisé pour isoler l'application du système hôte.
+* `application.properties` : Configure le comportement de Spring (H2, Hibernate, URL de l'IA Python).
+
+=== 💾 Couche de Données (Modèles & Repositories)
+* `entity/` : Les modèles de données (`Utilisateur`, `Partie`, `Question`, `CasePlateauEntity`, etc.).
+* `repository/` : Interfaces de communication SQL (requêtes natives pour le tirage aléatoire).
+* `dto/` : Objets de transfert (`PartieEtatDto`, `ReponseTourDto`) pour l'interface Angular.
+
+=== 🧠 Couche Logique (Services Métiers)
+* `MoteurJeuService` : Logique de déplacement et application des effets spéciaux.
+* `IaJugeService` : Système d'analyse des réponses avec algorithme de Levenshtein.
+* `IAService` : Gestion des appels HTTP vers le serveur Django pour les coups des Bots.
+* `HistoriqueQuestionService` : Garantit le tirage de questions inédites.
+
+=== 🔌 Couche API (Contrôleurs)
+* `JeuRestController` : Gestion du flux du jeu et de l'état de la partie.
+* `AuthRestController` : Inscription et connexion classique (JWT).
+* `AdminRestController` : Routes spécifiques pour la gestion de la base de données.
+
+== 🛡️ Droits d'accès et Rôles (Important)
+Le serveur applique une politique de sécurité stricte basée sur les rôles :
+
+* **Joueurs (ROLE_USER) :** Vous ne pourrez effectuer que des appels `GET` sur les ressources de jeu courantes. Les requêtes concernant les **Questions** et l'**Historique des questions** (même en simple lecture `GET`) vous seront refusées.
+* **Administrateurs (ROLE_ADMIN) :** Les actions de modification, de création et de suppression (`PUT`, `POST`, `DELETE`), ainsi que la consultation globale de toutes les données (y compris l'historique et les questions), sont **réservées exclusivement aux administrateurs**.
+
+_Pour tester ces fonctionnalités et l'espace d'administration :_ Lancez l'application Angular, sélectionnez le serveur **Spring** dans la barre de navigation, puis connectez-vous avec un compte possédant le rôle administrateur.
+
+== 🛠️ Installation et Configuration
+
+=== 🔑 Gestion des Secrets (Obligatoire)
+IMPORTANT: Avant de configurer vos secrets, assurez-vous d'avoir consulté le link:../../README.adoc#_tutoriel_obtenir_vos_clés_api_oauth2[Tutoriel pour obtenir vos clés API] disponible dans le README à la racine du projet.
+
+1. Dans le dossier `src/main/resources/`, créez un fichier nommé `application-secret.properties`.
+2. Remplissez-le avec vos propres identifiants :
+
+[source,properties]
+----
+# Clé secrète pour signer les jetons JWT (minimum 32 caractères)
+jwt.secret=VOTRE_CLE_TRES_LONGUE_ET_SECURISEE
+
+# Configuration Google Cloud Console
+spring.security.oauth2.client.registration.google.client-id=VOTRE_ID_GOOGLE
+spring.security.oauth2.client.registration.google.client-secret=VOTRE_SECRET_GOOGLE
+
+# Configuration GitHub OAuth App
+spring.security.oauth2.client.registration.github.client-id=VOTRE_ID_GITHUB
+spring.security.oauth2.client.registration.github.client-secret=VOTRE_SECRET_GITHUB
+----
+
+== 🚀 Comment lancer le serveur ?
+
+=== 🖥️ Méthode A : Interface Graphique (IDE)
+1. Ouvrez le dossier `BACKSPRING/backspring/` dans votre IDE (IntelliJ, VS Code, Eclipse).
+2. Naviguez vers `src/main/java/com/iaspring/backspring/BackspringApplication.java`.
+3. Cliquez sur le bouton **"Run"** ou faites un clic droit -> **"Run 'BackspringApplication'"**.
+
+=== 💻 Méthode B : Ligne de commande (Maven)
+⚠️ **Note importante :** Si vous lancez le projet manuellement sans Docker, il est recommandé de ne démarrer qu'un seul serveur back-end à la fois (soit Spring, soit Django) et d'arrêter l'autre pour éviter tout conflit réseau ou consommation inutile de ressources.
+
+[source,bash]
+----
+# Sur Linux / macOS
+./mvnw spring-boot:run
+
+# Sur Windows
+.\mvnw spring-boot:run
+----
+
+=== 🐋 Méthode C : Docker (Production)
+Depuis la racine du projet (où se trouve le `docker-compose.yml`) :
+[source,bash]
+----
+sudo docker-compose up --build -d backspring
+----
+
+== 🛑 Comment arrêter le serveur ?
+* **IDE :** Cliquez sur le bouton d'arrêt (carré rouge).
+* **Maven :** Appuyez sur `Ctrl + C` dans le terminal.
+* **Docker :** Tapez `sudo docker-compose stop backspring`.
+
+== 🛠️ Dépannage
+Pour réinitialiser la base de données H2 en mode Docker :
+[source,bash]
+----
+sudo docker-compose down -v
+----

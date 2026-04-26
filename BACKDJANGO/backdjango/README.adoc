@@ -1,0 +1,104 @@
+= 🎸 Serveur Back-End Python (Django)
+:toc: macro
+:toc-title: Sommaire
+:sectnums:
+
+toc::[]
+
+link:../../README.adoc[⬅️ Retour à la racine du projet]
+
+== 📖 Présentation du module
+Ce module constitue le second pilier back-end du projet. Développé avec **Python 3.12** et **Django**, il offre une alternative performante au serveur Java. Sa mission principale est de servir de cerveau pour les adversaires automatisés (Bots) et d'assurer la gestion de la banque de questions via un système d'importation SQL optimisé.
+
+== 🏗️ Architecture et Fichiers Clés
+
+=== ⚙️ Configuration & Infrastructure
+* `settings.py` : Configuration centrale (Base SQLite, middleware CORS, gestion des variables d'environnement).
+* `requirements.txt` : Dépendances Python (Django, Django REST Framework, PyJWT, Python-dotenv, Faker).
+* `Dockerfile` : Image basée sur `python:3.12-slim` pour un déploiement léger.
+* `entrypoint.sh` : Script d'automatisation qui lance les migrations, importe les questions et crée les comptes de démo au démarrage du conteneur.
+
+=== 💾 Modèles & Logique (Couche Data)
+* `models.py` : Schéma de la base (Utilisateurs, Questions, Parties, Joueurs, Historique, Grille).
+* `managers.py` : Logique de sélection intelligente (ex: tirage de questions inédites).
+
+=== 🧠 Services & Moteur de Jeu
+* `services.py` : Logique de mouvement, gestion des dés et déclenchement des effets de cases.
+* `ia_juge_service.py` : Algorithme de distance de Levenshtein pour la tolérance orthographique.
+
+=== 🔌 API & Sérialisation (Couche Web)
+* `views.py` : Contrôleurs traitant les requêtes du Front (Jeu, Authentification, OAuth2).
+* `serializers.py` : Traduction des modèles SQL en format JSON pour Angular.
+* `urls.py` : Définition des routes de l'API (ex: `/api/jeu/repondre/`).
+
+=== 🛡️ Sécurité & Authentification
+* `security.py` : Service JWT et filtre d'authentification pour sécuriser les accès API.
+
+=== 🛠️ Scripts de Gestion
+* `importer_questions.py` : Commande personnalisée pour injecter les 120 questions du fichier SQL.
+* `init_demo.py` : Initialise les comptes `admin@demo.com` et `joueur@demo.com`.
+* `jouer_cli.py` : Interface en ligne de commande pour tester le moteur sans interface graphique.
+
+== 🛡️ Droits d'accès et Rôles (Important)
+L'API Django applique une politique de sécurité stricte basée sur les rôles :
+
+* **Joueurs (ROLE_USER) :** Vous ne pourrez effectuer que des appels `GET` sur les ressources de jeu courantes. Les requêtes concernant les **Questions** et l'**Historique des questions** (même en simple lecture `GET`) vous seront refusées.
+* **Administrateurs (ROLE_ADMIN) :** Les actions de modification, de création et de suppression (`PUT`, `POST`, `DELETE`), ainsi que la consultation globale de toutes les données (y compris l'historique et les questions), sont **réservées exclusivement aux administrateurs**.
+
+_Pour tester ces fonctionnalités et l'espace d'administration :_ Lancez l'application Angular, sélectionnez le serveur **Django** dans la barre de navigation, puis connectez-vous avec un compte possédant le rôle administrateur.
+
+== ⚙️ Installation et Configuration
+
+=== 🔑 Configuration du fichier .env
+IMPORTANT: Avant de configurer vos secrets, assurez-vous d'avoir consulté le link:../../README.adoc#_tutoriel_obtenir_vos_clés_api_oauth2[Tutoriel pour obtenir vos clés API] disponible dans le README à la racine du projet.
+
+1. Créez un fichier `.env` dans le dossier `BACKDJANGO/backdjango/`.
+2. Utilisez le modèle suivant (basé sur le fichier `env.example` inclus) :
+
+[source,env]
+----
+# --- AUTHENTIFICATION SOCIALE ---
+GITHUB_CLIENT_ID=votre_client_id_github_ici
+GITHUB_CLIENT_SECRET=votre_secret_github_ici
+
+GOOGLE_CLIENT_ID=votre_client_id_google_ici
+GOOGLE_CLIENT_SECRET=votre_secret_google_ici
+
+# --- SÉCURITÉ ---
+JWT_SECRET_KEY=mettez_une_cle_secrete_tres_longue_ici
+----
+
+== 🚀 Comment lancer le serveur ?
+
+=== 🐋 Méthode 1 : Docker Compose (Recommandé)
+[source,bash]
+----
+sudo docker-compose up --build -d backdjango
+----
+Le serveur sera accessible sur le port **8000**.
+
+=== 🖥️ Méthode 2 : Lancement Manuel
+⚠️ **Note importante :** Si vous lancez le projet manuellement sans Docker, il est recommandé de ne démarrer qu'un seul serveur back-end à la fois (soit Spring, soit Django) et d'arrêter l'autre pour éviter tout conflit réseau ou consommation inutile de ressources.
+
+1. Entrez dans le dossier : `cd BACKDJANGO/backdjango/`
+2. Installez les dépendances : `pip install -r requirements.txt`
+3. Initialisez la base de données :
+[source,bash]
+----
+python manage.py migrate
+python manage.py importer_question
+python manage.py generer_donnees
+python manage.py init_demo
+----
+4. Démarrez le serveur : `python manage.py runserver 0.0.0.0:8000`
+
+== 🛑 Comment arrêter le serveur ?
+* **Docker :** `sudo docker-compose stop backdjango`
+* **Manuel :** Appuyez sur `Ctrl + C` dans le terminal.
+
+== 🛠️ Dépannage
+Pour réinitialiser uniquement la base de données Django (SQLite) en mode Docker :
+[source,bash]
+----
+sudo docker-compose down -v
+----

@@ -1,0 +1,119 @@
+= 🚀 Projet Jeu de Plateau IA : Multi-Backend (Spring & Django)
+:toc: macro
+:toc-title: Sommaire
+:sectnums:
+
+toc::[]
+
+== 📖 Présentation du Projet
+Ce projet est une application web de jeu de plateau interactive où les joueurs affrontent des adversaires automatisés (Bots). L'objectif est d'atteindre la case finale en répondant correctement à des questions de culture générale.
+
+L'innovation majeure réside dans son architecture hybride : l'interface **Angular** peut basculer dynamiquement entre deux moteurs back-end différents :
+* Un serveur **Java (Spring Boot)** pour la robustesse et la gestion des données H2.
+* Un serveur **Python (Django)** pour la logique des Bots et le traitement SQL performant.
+
+== 🏗️ Architecture et Composants
+Le projet est divisé en trois modules indépendants. Chaque module possède sa propre documentation détaillée :
+
+* 🎨 link:./FRONT/README.adoc[**FRONT (Angular)**] : L'interface utilisateur interactive (Port 4200).
+* ☕ link:./BACKSPRING/README.adoc[**BACKSPRING (Java)**] : Le moteur de jeu principal en Spring Boot (Port 8080).
+* 🎸 link:./BACKDJANGO/README.adoc[**BACKDJANGO (Python)**] : Le cerveau des bots et moteur alternatif (Port 8000).
+
+== 🛠️ Prérequis
+Pour exécuter ce projet, vous devez disposer de :
+* **Docker** et **Docker Compose** (Fortement recommandé).
+* _Ou pour le développement manuel :_ Node.js v24+, Java JDK 25 et Python 3.12.
+
+== 🔑 Tutoriel : Obtenir vos Clés API (OAuth2)
+L'authentification sociale nécessite la création d'identifiants sur les plateformes respectives.
+
+=== 🌐 Google Cloud Console
+1. Allez sur la link:https://console.cloud.google.com/[Google Cloud Console].
+2. Créez un nouveau projet.
+3. Accédez à **API et services > Identifiants**.
+4. Cliquez sur **Créer des identifiants > ID de client OAuth**.
+5. Configurez l'écran de consentement en mode "Externe".
+6. **Origines JavaScript autorisées :** `http://localhost:4200`
+7. **URI de redirection autorisés :**
+   * Pour Spring : `http://localhost:8080/login/oauth2/code/google`
+   * Pour Django : `http://localhost:8000/api/auth/google/callback/`
+8. Notez votre **Client ID** et **Client Secret**.
+
+=== 🐙 GitHub Developer Settings
+1. Allez dans vos **Settings** GitHub > **Developer Settings** > **OAuth Apps**.
+2. Cliquez sur **New OAuth App**.
+3. **Homepage URL :** `http://localhost:4200`
+4. **Authorization callback URL :**
+   * Pour Spring : `http://localhost:8080/login/oauth2/code/github`
+   * Pour Django : `http://localhost:8000/api/auth/github/callback/`
+5. Enregistrez et générez un **Client Secret**.
+
+== 🚀 Comment lancer le projet ?
+
+=== 🐋 Méthode 1 : Docker Compose (Recommandé)
+Cette méthode automatise la compilation et la mise en réseau des trois modules.
+[source,bash]
+----
+sudo docker-compose up --build
+----
+L'interface est alors disponible sur **http://localhost:4200**.
+
+=== 🖥️ Méthode 2 : Lancement Manuel
+Vous devez ouvrir trois terminaux distincts. 
+
+⚠️ **Note importante :** Si vous lancez le projet manuellement sans Docker, il est recommandé de ne démarrer qu'un seul serveur back-end à la fois (soit Spring, soit Django) et d'arrêter l'autre pour éviter tout conflit ou consommation inutile de ressources.
+
+. **Terminal 1 : Back-End Spring**
+[source,bash]
+----
+cd BACKSPRING/backspring/
+./mvnw spring-boot:run
+----
+
+. **Terminal 2 : Back-End Django**
+[source,bash]
+----
+cd BACKDJANGO/backdjango/
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+----
+
+. **Terminal 3 : Front-End Angular**
+[source,bash]
+----
+cd FRONT/front/
+npm install --legacy-peer-deps
+ng serve
+----
+
+== 🎮 Règles du Jeu et Effets
+
+=== Déroulement
+1. Allez sur la page de connexion.
++
+💡 **Astuce Testeur / Recruteur :** Si l'initialisation des bases de données s'est bien passée, vous n'avez pas besoin de taper d'identifiants pour tester l'espace d'administration. Cliquez simplement sur le bouton **"👑 Se connecter en tant qu'Admin"** pour y accéder automatiquement !
+2. Connectez-vous et créez une partie dans le **Salon**.
+3. À chaque tour, une question est posée.
+4. **Bonne réponse :** Vous avancez selon le résultat du dé.
+5. **Mauvaise réponse :** Vous restez sur place ou reculez.
+6. Le premier arrivé à la case finale gagne.
+
+=== Effets de Cases
+* 🛡️ **BOUCLIER :** Protection contre le prochain malus.
+* 🏃 **SPRINT :** Prochain dé doublé.
+* 💣 **RISQUE EXPLOSIF :** En cas d'erreur, tout le monde recule.
+* ⚖️ **IA JUGE :** Analyse des réponses avec tolérance orthographique (Levenshtein).
+
+== 🛑 Comment arrêter le jeu ?
+* **Docker :** Appuyez sur `Ctrl + C` puis tapez `sudo docker-compose down`.
+* **Manuel :** Appuyez sur `Ctrl + C` dans chaque terminal.
+
+== 🛠️ Dépannage et Remise à zéro
+Si vous souhaitez réinitialiser complètement l'environnement (vider les bases de données pour recommencer à zéro) :
+
+[source,bash]
+----
+sudo docker-compose down -v
+----
+_Cette commande supprime uniquement les volumes Docker rattachés à ce projet spécifique sans impacter le reste du système._

@@ -1,11 +1,11 @@
 import os
 from pathlib import Path
-from dotenv import load_dotenv # 👉 NOUVEAU
+from dotenv import load_dotenv
 
 # Chemins de base
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# 👉 NOUVEAU : Demande à Django de charger le fichier .env
+# Charge le fichier .env
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Sécurité (Clé par défaut pour le développement local)
@@ -15,7 +15,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-# --- Applications installées (Version MVP Épurée) ---
+# --- Applications installées ---
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,16 +24,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    # Packages tiers utiles
-    'rest_framework', # Pratique pour structurer nos réponses API
-    
+    # Packages tiers
+    'rest_framework',
     'corsheaders',
     
     # Ton application
     'game',
 ]
 
-# --- Middlewares nettoyés de CORS et Allauth ---
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
@@ -65,6 +63,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "backdjango.wsgi.application"
 
+# --- 🛠️ CORRECTION : Base de données SQLite persistante pour Docker ---
+# On utilise un sous-dossier 'donnees_django' qui sera lié à un volume Docker
 # --- Base de données SQLite (Persistante localement) ---
 DATABASES = {
     'default': {
@@ -72,6 +72,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # --- Reste des paramètres par défaut ---
 AUTH_PASSWORD_VALIDATORS = [
@@ -96,15 +97,15 @@ REST_FRAMEWORK = {
         'game.security.JWTAuthentication', 
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny', # Libre par défaut (comme Spring)
+        'rest_framework.permissions.AllowAny',
     ]
 }
 
+# Variables d'environnement pour OAuth2
 GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
 GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
-
 GITHUB_CLIENT_ID = os.environ.get('GITHUB_CLIENT_ID')
 GITHUB_CLIENT_SECRET = os.environ.get('GITHUB_CLIENT_SECRET')
 
-# L'URL de ton front-end Angular (pour la redirection finale)
-ANGULAR_LOGIN_URL = 'http://localhost:4200/login'
+# URL de redirection après Login Social
+ANGULAR_LOGIN_URL = "http://localhost:4200/login"

@@ -1,2 +1,8 @@
 .env
-application-secret.properties
+BACKSPRING/backspring/src/main/resources/application-secret.properties
+# Base de données locale H2
+*.mv.db
+*.trace.db
+donnees_spring/
+donnees_django/
+BACKDJANGO/backdjango/db.sqlite3

@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # ------------------------------------
+  # 1. FRONTEND ANGULAR (Serveur Nginx)
+  # ------------------------------------
+  front:
+    build: 
+      context: ./FRONT/front
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80" # 👈 L'ASTUCE EST LÀ : Ton PC (4200) -> Nginx (80)
+    depends_on:
+      - backspring
+      - backdjango
+    networks:
+      - jeu_network
+    restart: unless-stopped
+
+  # ------------------------------------
+  # 2. BACKEND SPRING BOOT (Java 25)
+  # ------------------------------------
+  backspring:
+    build: 
+      # 👉 CORRECTION : On pointe vers le sous-dossier exact où se trouve le pom.xml
+      context: ./BACKSPRING/backspring
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      # On stocke les données à la racine du projet global pour plus de clarté
+      - ./donnees_spring:/app
+    networks:
+      - jeu_network
+    restart: unless-stopped
+
+  # ------------------------------------
+  # 3. BACKEND DJANGO (Python 3.12)
+  # ------------------------------------
+  backdjango:
+    build: 
+      # 👉 CORRECTION : On pointe vers le sous-dossier exact où se trouve le manage.py
+      context: ./BACKDJANGO/backdjango
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      # On stocke les données à la racine du projet global pour plus de clarté
+      - ./BACKDJANGO/backdjango/db.sqlite3:/app/db.sqlite3
+    networks:
+      - jeu_network
+    restart: unless-stopped
+
+# Réseau interne pour la communication entre conteneurs
+networks:
+  jeu_network:
+    driver: bridge
