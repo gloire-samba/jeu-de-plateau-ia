@@ -36,7 +36,8 @@ class PartieEtatCompletSerializer(serializers.ModelSerializer):
 class UtilisateurCrudSerializer(serializers.ModelSerializer):
     class Meta:
         model = Utilisateur
-        fields = ['id', 'pseudo', 'email', 'role', 'date_inscription'] # 👉 NOUVEAU : 'role' ajouté
+        fields = ['id', 'pseudo', 'email', 'mot_de_passe','role', 'date_inscription'] # 👉 NOUVEAU : 'role' ajouté
+        extra_kwargs = {'mot_de_passe': {'write_only': True}}
 
 class QuestionCrudSerializer(serializers.ModelSerializer):
     class Meta:
